@@ -116,7 +116,6 @@ Settings → Pages → Source를 **Deploy from a branch → `gh-pages` / `(root)
 (`.github/workflows/deploy.yml`이 빌드해서 `gh-pages` 브랜치로 밀어줍니다.)
 
 첫 빌드는 3~5분 걸립니다. Actions 탭에서 결과를 확인하세요.
-**로컬에 Ruby를 설치할 필요는 없습니다.** 빌드는 GitHub에서 돕니다.
 
 ### 3. 도메인
 
@@ -138,23 +137,26 @@ Google Sites는 301 리다이렉트를 걸 수 없습니다. 지우지 마시고
 
 ---
 
-## 로컬 미리보기 (선택)
+## 로컬 미리보기
 
-Windows에서 Ruby 설치가 번거로우면 건너뛰어도 됩니다. PR마다 CI가 빌드를 검증합니다.
-
-Docker가 있다면:
-
-```bash
-docker compose up
-# http://localhost:8080
-```
-
-Ruby를 직접 설치한 경우:
+이 PC는 **WSL Ubuntu 24.04 + Ruby 3.2.3**으로 이미 세팅해뒀습니다.
+gem은 `vendor/bundle/`(D드라이브, git 추적 제외)에 들어 있습니다. sudo 없이 동작합니다.
 
 ```bash
-bundle install
-bundle exec jekyll serve
+wsl -d Ubuntu -- bash -lc 'cd /mnt/d/codexWorkspace/cislab-site &&   export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH" &&   bundle exec jekyll serve --host 0.0.0.0'
+# http://localhost:4000
 ```
+
+`--watch`가 기본이라 파일을 고치면 자동으로 다시 빌드됩니다. 빌드는 약 1.6초.
+
+한 번만 빌드하려면 `bundle exec jekyll build` (결과물은 `_site/`).
+
+### ImageMagick 경고
+
+로컬 빌드에서 `convert: not found` 경고가 납니다. 이미지의 webp 축소본을 만드는
+단계인데, 설치에 sudo가 필요해서 생략했습니다. **빌드는 정상 완료되고**, GitHub
+Actions에는 ImageMagick이 설치되므로 실제 배포본에는 영향이 없습니다.
+없애고 싶으면 `sudo apt install imagemagick` 한 번 하시면 됩니다.
 
 ---
 
@@ -165,6 +167,10 @@ bundle exec jekyll serve
 - `_pages/profiles.md`(1인용 프로필 레이아웃)를 **`_pages/people.md`로 교체** — `_data/people.yml`에서 렌더링하는 랩 명단 형태
 - `_pages/research.md`, `_pages/join.md` 신규 작성
 - 논문 배지에서 Altmetric / Dimensions / InspireHEP 비활성화, Google Scholar만 유지
+- `external_sources` 비활성화 — 원본 설정이 al-folio의 Medium 피드와 Google AI 블로그 글을
+  우리 사이트로 끌어오고 있었습니다 (첫 빌드에서 실제로 `blog/2024/google-gemini-...` 페이지가 생성됨)
+- `max_author_limit` 해제 — 3명에서 잘려서 7인 공저 논문(KICS 2017)에서 교수님 이름이
+  "and 4 more authors"에 가려졌습니다
 
 업스트림 al-folio 업데이트를 가져오고 싶으면:
 

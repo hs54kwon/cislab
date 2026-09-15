@@ -14,7 +14,7 @@ nav_order: 3
 {% endcomment %}
 
 {% assign groups = "faculty,phd,ms,undergrad" | split: "," %}
-{% assign labels = "Faculty,Ph.D. Students,M.S. Students,Undergraduate Researchers" | split: "," %}
+{% assign labels = "Faculty,Ph.D. &amp; Integrated Students,M.S. Students,Undergraduate Researchers" | split: "," %}
 
 {% for g in groups %}
   {% assign members = site.data.people[g] %}
