@@ -21,7 +21,10 @@
 | 사이트 제목·주소·푸터 | `_config.yml` |
 | 학회 배지 색 | `_data/venues.yml` |
 
-레이아웃(`_layouts/`, `_includes/`, `_sass/`)은 al-folio 원본이므로 건드리지 않는 편이 업스트림 업데이트를 따라가기 쉽습니다.
+| 디자인·글자 크기·색 | `_sass/_custom.scss` |
+| 학회 등급 표시 | `_data/venues.yml` |
+
+레이아웃은 al-folio gem 안에 있습니다. 예외는 `_layouts/bib.liquid` 하나뿐입니다 (아래 참고).
 
 ### 논문 한 편 추가하기
 
@@ -88,11 +91,59 @@ grep -rn "TODO" _bibliography _data _pages _news
 | Hyungjun / Hyungjune Shin | **Hyungjune Shin** | 국내논문 저자 `신형준` |
 | Jeju Isalnd | **Jeju Island** | 오타, 2곳 |
 
+### 학회/저널 등급 표시
+
+배지 아래에 작은 마커가 붙습니다. `_data/venues.yml`에서 **학회별로 한 번만** 지정하며,
+논문마다 손댈 필요가 없습니다.
+
+| 종류 | 마커 | 해당 학회/저널 |
+|---|---|---|
+| 학회 | `Top-tier` | IEEE S&P, ACM CCS, USENIX Security |
+| 저널 | `Q1` + 퍼센타일 | ACM CSUR (Top 1%), IEEE TDSC (Top 10%), IEEE TIFS (Top 10%) |
+
+- 포스터 2건(IEEE S&P 2018, USENIX Sec 2017)은 `tier = {none}`으로 **자동 제외**됩니다.
+  정식 논문이 아닌데 top-tier 마커가 붙으면 과장이 되기 때문입니다.
+- 범위를 바꾸려면 `_data/venues.yml`의 해당 줄만 고치면 됩니다.
+- 특정 논문만 예외를 두려면 bib 엔트리에 `tier = {...}` / `percentile = {...}`를 넣으면
+  venues.yml 값을 덮어씁니다.
+
+#### ⚠ 퍼센타일 수치는 아직 검증 전입니다
+
+현재 들어간 값(CSUR 1%, TDSC/TIFS 10%)은 **어림값이며 확인이 필요합니다.**
+마커에 마우스를 올리면 `TODO verify: JCR, ...` 툴팁이 뜨도록 해뒀습니다.
+
+**JCR 수치는 자동으로 가져올 수 없습니다.** Clarivate JCR은 유료 구독이고 공개 API가
+없으며, 스크래핑은 이용약관 위반입니다. 확인 방법은 둘 중 하나입니다.
+
+1. **인하대 도서관 JCR 구독으로 직접 조회** (가장 정확). 저널별로 카테고리와 연도를
+   확인해서 `percentile:`과 `tier_note:`를 채우면 됩니다. 같은 저널도 카테고리에 따라
+   퍼센타일이 다르니 `tier_note`에 어느 카테고리 기준인지 꼭 남겨주세요.
+2. **SJR(SCImago)로 대체** — 무료 공개 데이터이고 CSV로 내려받을 수 있습니다. JCR과
+   수치가 다르므로, 쓰려면 `tier_note`에 "SJR 2025" 처럼 출처를 명시해야 합니다.
+   자동으로 채워넣는 스크립트가 필요하면 말씀해주세요.
+
 ### Impact Factor 표기는 전부 제거했습니다
 
 기존 사이트의 IF 값은 2019~2021년 기준이라 현재 수치와 맞지 않고(TSC 11.019는 지금 5점대),
 `BK IF`는 국내 지표라 해외 방문자에게 의미가 전달되지 않습니다.
-대신 학회·저널 배지를 색으로 구분해 두었습니다. 다시 넣고 싶으시면 말씀해주세요.
+위의 Q1/퍼센타일 마커가 그 역할을 대신합니다.
+
+### 디자인 커스터마이징
+
+`_sass/_custom.scss` 한 파일에 모여 있고, `assets/css/main.scss`에서 **맨 마지막에**
+로드되므로 gem을 건드리지 않고 테마를 덮어씁니다.
+
+- **강조색**: 인하대 블루 `#00539B` (다크모드는 대비 확보를 위해 `#5AA2DD`).
+  al-folio 기본값은 형광 마젠타 `#b509ac`였습니다.
+- **글자 크기**: 페이지 제목이 Bootstrap 기본값으로 데스크톱에서 ~50px까지 커지던 것을
+  clamp로 고정했고, 본문은 0.95rem / line-height 1.7로 조정했습니다.
+- **소셜 아이콘**: 테마 기본이 `font-size: 4rem`(64px)이라 홈 하단을 점령하고 있었습니다.
+- 되돌리려면 `_sass/_custom.scss`에서 해당 블록만 지우면 됩니다. 각 블록에 왜 넣었는지
+  주석이 달려 있습니다.
+
+`_layouts/bib.liquid`는 등급 마커를 넣기 위해 gem에서 복사해 온 **유일한** 오버라이드
+파일입니다 (al_folio_core 1.0.15 기준). gem을 올릴 때는 이 파일이 낡지 않았는지
+확인하세요 — 추가한 부분은 `CIS Lab addition` 주석으로 표시해뒀습니다.
 
 ---
 

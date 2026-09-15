@@ -1,59 +1,82 @@
 # Colour of the venue badge shown next to each publication.
 # The key must match the `abbr` field in _bibliography/papers.bib exactly.
+#
+# `tier:` and `percentile:` print small markers under the badge. They are set
+# once per venue here, not per paper. A bib entry can override either, or
+# suppress with `tier = {none}` (the two posters do this).
+#
+# Convention: conferences get `tier: Top-tier`; journals get `tier: Q1` plus a
+# `percentile:` for the field rank. `tier_note:` becomes a hover tooltip and
+# should record WHICH ranking and WHICH year the number came from, so the
+# figures can be re-checked later.
+#
+# !! The percentile values below are UNVERIFIED estimates. See README. !!
 
 "IEEE S&P":
   url: https://www.ieee-security.org/TC/SP-Index.html
-  color: "#8c1515"
+  color: "#00539b"
+  tier: Top-tier
 "ACM CCS":
   url: https://www.sigsac.org/ccs.html
-  color: "#8c1515"
+  color: "#00539b"
+  tier: Top-tier
 "USENIX Sec":
   url: https://www.usenix.org/conferences/byname/108
-  color: "#8c1515"
+  color: "#00539b"
+  tier: Top-tier
 "IEEE TDSC":
   url: https://www.computer.org/csdl/journal/tq
-  color: "#00529b"
+  color: "#2b7aa8"
+  tier: Q1
+  percentile: Top 10%
+  tier_note: "TODO verify: JCR, Computer Science / Information Systems, year?"
 "IEEE TIFS":
   url: https://signalprocessingsociety.org/publications-resources/ieee-transactions-information-forensics-and-security
-  color: "#00529b"
+  color: "#2b7aa8"
+  tier: Q1
+  percentile: Top 10%
+  tier_note: "TODO verify: JCR, Computer Science / Information Systems, year?"
 "ACM CSUR":
   url: https://dl.acm.org/journal/csur
-  color: "#00529b"
+  color: "#2b7aa8"
+  tier: Q1
+  percentile: Top 1%
+  tier_note: "TODO verify: JCR, Computer Science / Theory & Methods, year?"
 "IEEE TSC":
-  color: "#00529b"
+  color: "#2b7aa8"
 "IEEE TCC":
-  color: "#00529b"
+  color: "#2b7aa8"
 "IEEE IoT-J":
-  color: "#00529b"
+  color: "#2b7aa8"
 "IEEE Access":
-  color: "#4a6572"
+  color: "#4f7d94"
 "IJIS":
-  color: "#4a6572"
+  color: "#4f7d94"
 "PPNA":
-  color: "#4a6572"
+  color: "#4f7d94"
 "WPC":
-  color: "#4a6572"
+  color: "#4f7d94"
 "MTAP":
-  color: "#4a6572"
+  color: "#4f7d94"
 "MIS":
-  color: "#4a6572"
+  color: "#4f7d94"
 "IEEE CLOUD":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "IEEE SERVICES":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "ACM BCC":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "WISA":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "ICUFN":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "WASA":
-  color: "#5a5a5a"
+  color: "#5f7183"
 "CISC-S":
-  color: "#8a8a8a"
+  color: "#9099a3"
 "CISC-W":
-  color: "#8a8a8a"
+  color: "#9099a3"
 "KICS":
-  color: "#8a8a8a"
+  color: "#9099a3"
 "KIISE":
-  color: "#8a8a8a"
+  color: "#9099a3"
