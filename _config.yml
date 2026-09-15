@@ -7,7 +7,7 @@ first_name: Hyunsoo
 middle_name:
 last_name: Kwon
 contact_note: >
-  Prospective students: please read the <a href="/join/">Join us</a> page before emailing.
+  Prospective students are welcome to write, but please say which of our topics interests you.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Computer & Intelligence Security (CIS) Lab at Inha University. We study the security of
   real deployed systems: the TLS and PKI ecosystem, the software supply chain, and encrypted data.
@@ -19,8 +19,8 @@ lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
 icon: 🔐 # favicon emoji; replace with an image name in /assets/img/ for a real logo
 apple_touch_icon: # image name in /assets/img/ (or a rooted path / absolute URL) used for iOS home-screen bookmarks; needs a real 180x180 PNG, since Safari ignores the emoji favicon above. Left empty, iOS falls back to a screenshot of the page.
 
-url: https://inha-cislab.github.io # TODO: change to https://cislab.inha.ac.kr if IT grants the CNAME
-baseurl: # leave blank for a root-level site (user/org page or custom domain)
+url: https://hs54kwon.github.io # change to https://cislab.inha.ac.kr if IT grants the CNAME
+baseurl: /cislab # repo name; leave blank if a custom domain serves this at the root
 last_updated: true # shows a last-updated stamp in the footer
 impressum_path: # set to path to include impressum link in the footer, use the same path as permalink in a page, helps to conform with EU GDPR
 back_to_top: true # set to false to disable the back to top button

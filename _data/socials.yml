@@ -1,7 +1,6 @@
 # Links shown as icons at the bottom of the home page.
 # Delete any line you do not want; blank values render a dead icon.
 email: hskwon@inha.ac.kr
-rss_icon: false
 # TODO: fill these in, or delete the lines.
 # scholar_userid:      # Google Scholar ID of the PI
 # github_username:     # lab GitHub organisation, e.g. inha-cislab

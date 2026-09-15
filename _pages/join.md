@@ -43,6 +43,3 @@ Put `[CIS Lab]` at the start of the subject line so the mail does not get lost.
 
 Feel free to drop by Room #1110, Inha Hi-Tech Center, but email first so we can make sure someone is there.
 
----
-
-<span style="color: var(--global-theme-color);">TODO before publishing: confirm the current recruiting status and the number of openings, and add graduate admission deadlines with a link to the Inha graduate school page.</span>
