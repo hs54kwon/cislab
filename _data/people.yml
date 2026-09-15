@@ -16,7 +16,7 @@
 
 faculty:
   - name: Hyunsoo Kwon
-    # image: hskwon.jpg  # TODO: drop a square photo at assets/img/people/hskwon.jpg and uncomment
+    image: hskwon.jpg
     role: Assistant Professor
     email: hskwon@inha.ac.kr
     topic: TLS/PKI ecosystem, software supply chain security, applied cryptography
