@@ -77,7 +77,10 @@ related_posts: false
 - `inline: false` → 홈에는 제목만, Notice에는 전문. 논문·과제 공지에 쓰세요.
 - 홈은 최근 5개만 (`_pages/about.md`의 `announcements.limit`)
 
-문장 틀: `Our {paper|survey} on {짧은 주제} {is accepted to|was presented at|appears in} {VENUE} {year}.`
+문장 틀:
+
+- 논문: `Our {paper|survey} on {짧은 주제} {is accepted to|was presented at|appears in} {VENUE} {year}.`
+- 새 구성원: `{이름} joins the lab as {소속}. Welcome, {이름}!`
 
 ---
 
