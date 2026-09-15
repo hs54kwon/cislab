@@ -7,7 +7,7 @@ nav: true
 nav_order: 1
 ---
 
-Our questions tend to start the same way: a security mechanism has been standardized, shipped, and widely adopted, and everyone assumes it works. We go and check.
+Our questions tend to start the same way. A security mechanism gets standardized and then widely deployed, at which point everyone assumes it works well. We go and check whether it does.
 
 ---
 

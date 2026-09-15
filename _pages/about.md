@@ -16,8 +16,8 @@ latest_posts:
   enabled: false
 ---
 
-Computer & Intelligence Security (CIS) Lab is conducting research in various security fields, including web security, artificial intelligence security, and cloud security, to establish a secure and trustworthy environment.
+Computer & Intelligence Security (CIS) Lab is conducting research in various security fields, including web security, software supply chain security, artificial intelligence security, and cloud security, to establish a secure and trustworthy environment.
 
 We aim to research forward-looking security technologies and foster a secure cyber environment. We invite you to join us on this journey of exploring the future of security and creating innovative solutions.
 
-**We are recruiting.** Graduate and undergraduate students interested in this kind of work should read the [Join us]({{ '/join/' | relative_url }}) page.
+**We are recruiting.** Graduate and undergraduate students interested in our work are welcome to get in touch at <a href="mailto:hskwon@inha.ac.kr">hskwon@inha.ac.kr</a>.

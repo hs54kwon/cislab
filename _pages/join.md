@@ -3,8 +3,7 @@ layout: page
 permalink: /join/
 title: Join us
 description: Openings for graduate and undergraduate students.
-nav: true
-nav_order: 4
+nav: false # taken off the menu for now; the page still lives at /join/
 ---
 
 CIS Lab is looking for students who want to find out how deployed security systems actually behave. If you have ever wondered whether the padlock in your browser means what you were told it means, we would like to hear from you.

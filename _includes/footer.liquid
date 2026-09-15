@@ -1,0 +1,43 @@
+{%- comment -%}
+  CIS Lab override of the gem's footer.
+
+  Two changes from upstream:
+   1. The copyright line no longer carries the PI's personal name. This is a
+      lab site, not a personal page.
+   2. "Last updated" was rendered at the same weight as everything else, which
+      made it read as content. It is now a separate, quieter line.
+{%- endcomment -%}
+{% capture footer_contents %}
+  <div class="footer-main">{{ site.footer_text }}</div>
+  <div class="footer-meta">
+    &copy; {{ site.time | date: '%Y' }} CIS Lab
+    {%- if site.impressum_path %}
+      &middot; <a href="{{ site.url }}{{ site.baseurl }}{{ site.impressum_path }}">Impressum</a>
+    {%- endif -%}
+    {%- if site.last_updated %}
+      &middot; Last updated {{ 'now' | date: '%B %-d, %Y' }}
+    {%- endif %}
+  </div>
+{% endcapture %}
+
+{% if site.footer_fixed %}
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% else %}
+  <footer class="sticky-bottom mt-5" role="contentinfo">
+    {% if site.newsletter.enabled %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center.liquid %}
+      {% else %}
+        {% include newsletter.liquid %}
+      {% endif %}
+    {% endif %}
+
+    <div class="container">
+      {{ footer_contents }}
+    </div>
+  </footer>
+{% endif %}

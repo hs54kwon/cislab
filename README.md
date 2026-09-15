@@ -106,10 +106,11 @@ grep -rn "TODO" _bibliography _data _pages _news
 | 학회·저널 | tier | rank |
 |---|---|---|
 | IEEE S&P, ACM CCS | Top-tier | BK 4 |
-| USENIX Security | Top-tier | BK 3 |
+| USENIX Security | Top-tier | BK 3 (현재 포스터뿐이라 화면에는 안 보임) |
 | IEEE CLOUD | (없음) | BK 1 |
 | ACM CSUR | Q1 | Top 1% |
-| IEEE TDSC, TIFS, TSC | Q1 | Top 10% |
+| IEEE TDSC, TIFS, TSC, IoT-J | Q1 | Top 10% |
+| IJIS | Q1 | (퍼센타일 없음) |
 
 - **배지 색은 종류만 나타냅니다** — 파랑 `#00539b`는 학회, 슬레이트 `#5a6b7a`는 저널.
   등급은 아래 마커가 담당하므로 색을 여러 개 쓸 이유가 없습니다.
@@ -129,6 +130,14 @@ grep -rn "TODO" _bibliography _data _pages _news
 `search_enabled: false`, `bib_search: false`. Ctrl+K 오버레이와 논문 목록 위의
 "Type to filter" 입력창이 여기서 나오던 것입니다. 사이트가 작아 굳이 필요하지 않습니다.
 다시 켜려면 `_config.yml`에서 둘 다 `true`로 바꾸면 됩니다.
+
+### 연구실 학생 표시
+
+publications에서 **`_data/people.yml`에 이름이 있는 사람은 자동으로 볼드** 처리됩니다.
+교수님 이름은 기존대로 밑줄(jekyll-scholar의 `author_is_self`)이라 구분됩니다.
+
+학생을 명단에 추가하면 그 학생의 논문이 전부 자동으로 표시되므로, 따로 관리할 목록이
+없습니다. 졸업생을 `alumni`에 남겨두면 그들의 논문도 계속 표시됩니다.
 
 ### news 작성 규칙
 
@@ -162,9 +171,12 @@ grep -rn "TODO" _bibliography _data _pages _news
 뜹니다. gem 원본 코드의 Bootstrap 4 잔재(annotation 팝오버)이며, 우리가 그 파일을 복사해
 왔기 때문에 우리 쪽 줄번호로 표시될 뿐입니다. 해당 기능을 쓰지 않으므로 무해합니다.
 
-`_layouts/bib.liquid`는 등급 마커를 넣기 위해 gem에서 복사해 온 **유일한** 오버라이드
-파일입니다 (al_folio_core 1.0.15 기준). gem을 올릴 때는 이 파일이 낡지 않았는지
-확인하세요 — 추가한 부분은 `CIS Lab addition` 주석으로 표시해뒀습니다.
+gem에서 복사해 온 오버라이드 파일은 **두 개뿐**입니다 (al_folio_core 1.0.15 기준).
+gem을 올릴 때 이 둘이 낡지 않았는지 확인하세요. 추가·수정한 부분은 전부 주석으로
+표시해뒀습니다.
+
+- `_layouts/bib.liquid` — 등급 마커, 연구실 학생 볼드 처리
+- `_includes/footer.liquid` — 저작권에서 개인 이름 제거, last updated를 별도 줄로 분리
 
 ---
 
