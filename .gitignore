@@ -25,3 +25,5 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 node_modules/
+vendor/
+.bundle/

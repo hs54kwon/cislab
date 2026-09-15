@@ -25,25 +25,20 @@ faculty:
     # scholar: XXXXXXXXXXXX
 
 phd:
-  # TODO: confirm each student's degree track, start year, email and topic,
-  #       then delete the TODO lines. Names below are taken from co-authorship
-  #       on recent lab papers; the placement into groups is a guess.
-  - name: Sangkyoung Park
-    topic: Software supply chain, package attestation
-    # co-author, IEEE S&P 2027
-
   - name: Jiyong Lee
+    role: Integrated M.S./Ph.D. Student
     topic: Software supply chain, package attestation
-    # co-author, IEEE S&P 2027
+    # TODO: add year (entry year), email
 
-ms:
-  - name: Woonghee Lee
-    topic: Mobile browser security, certificate validation
-    # co-author, ACM CCS 2025
+ms: []
+  # No M.S.-track students at the moment. Delete the empty brackets above when
+  # the first one joins.
 
-undergrad: []
-  # Undergraduate researchers go here. Delete the empty brackets above when you
-  # add the first entry.
+undergrad:
+  - name: Sangkyoung Park
+    role: Undergraduate Researcher
+    topic: Software supply chain, package attestation
+    # TODO: add year, email
 
 alumni:
   # One line per graduate: name, degree, year, and where they went.
