@@ -46,8 +46,24 @@ html[data-theme="dark"] {
   margin-bottom: 0.35rem;
 }
 
+/* Separator between the page header and the body. Without it the title, the
+   subtitle and the opening paragraph run together as one block of text. A
+   hairline across the measure, with a short accent segment anchored left. */
 .post-header {
+  position: relative;
+  padding-bottom: 1.1rem;
   margin-bottom: 2rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.post-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 3.25rem;
+  height: 2px;
+  background: var(--global-theme-color);
 }
 
 .post-description,

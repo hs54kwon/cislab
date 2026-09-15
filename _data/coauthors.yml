@@ -1,12 +1,14 @@
 # Turns a co-author's name in the publication list into a link.
-# Key is the lowercased last name; `firstname` lists the spellings to match.
-
-"hur":
-  - firstname: ["Junbeom", "J."]
-    url: https://sites.google.com/view/dsclab
-"hahn":
-  - firstname: ["Changhee", "C."]
-    url: https://scholar.google.com/citations?user=Zs0CkO0AAAAJ
-"kim":
-  - firstname: ["Doowon", "D."]
-    url: https://doowon.github.io/
+#
+# EMPTY ON PURPOSE. Add an entry only when you have checked the URL yourself.
+# A wrong link here points a reader at the wrong researcher, which is worse
+# than no link at all.
+#
+# Key is the lowercased last name; `firstname` lists the spellings to match
+# (the bibliography uses full first names, so one spelling is usually enough).
+#
+# Example:
+#
+# "hur":
+#   - firstname: ["Junbeom", "J."]
+#     url: https://<verified homepage>

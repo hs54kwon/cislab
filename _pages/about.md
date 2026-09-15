@@ -6,8 +6,8 @@ subtitle: Computer & Intelligence Security Lab · Department of Computer Enginee
 
 profile:
   align: right
-  image: lab_pic.jpg
-  image_circular: false
+  # No lab photo yet. Add one to assets/img/ and set `image:` here; until then
+  # the block shows the address only, which is better than a placeholder box.
   more_info: >
     <p>Room #1110, Inha Hi-Tech Center</p>
     <p>100 Inha-ro, Michuhol-gu</p>
