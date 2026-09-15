@@ -93,40 +93,46 @@ grep -rn "TODO" _bibliography _data _pages _news
 
 ### 학회/저널 등급 표시
 
-배지 아래에 작은 마커가 붙습니다. `_data/venues.yml`에서 **학회별로 한 번만** 지정하며,
+배지 아래에 마커가 최대 두 개 붙습니다. `_data/venues.yml`에서 **학회당 한 번만** 지정하며
 논문마다 손댈 필요가 없습니다.
 
-| 종류 | 마커 | 해당 학회/저널 |
+| 필드 | 역할 | 값 예시 |
 |---|---|---|
-| 학회 | `Top-tier` | IEEE S&P, ACM CCS, USENIX Security |
-| 저널 | `Q1` + 퍼센타일 | ACM CSUR (Top 1%), IEEE TDSC (Top 10%), IEEE TIFS (Top 10%) |
+| `tier` | 진한 마커 | 학회 `Top-tier` / 저널 `Q1` |
+| `rank` | 흐린 마커 | 학회 `BK 4` / 저널 `Top 10%` |
 
-- 포스터 2건(IEEE S&P 2018, USENIX Sec 2017)은 `tier = {none}`으로 **자동 제외**됩니다.
-  정식 논문이 아닌데 top-tier 마커가 붙으면 과장이 되기 때문입니다.
-- 범위를 바꾸려면 `_data/venues.yml`의 해당 줄만 고치면 됩니다.
-- 특정 논문만 예외를 두려면 bib 엔트리에 `tier = {...}` / `percentile = {...}`를 넣으면
-  venues.yml 값을 덮어씁니다.
+현재 값 (2026-09-15 확인):
 
-#### ⚠ 퍼센타일 수치는 아직 검증 전입니다
+| 학회·저널 | tier | rank |
+|---|---|---|
+| IEEE S&P, ACM CCS | Top-tier | BK 4 |
+| USENIX Security | Top-tier | (BK 점수 미확인) |
+| IEEE CLOUD | (없음) | BK 1 |
+| ACM CSUR | Q1 | Top 1% |
+| IEEE TDSC, TIFS, TSC | Q1 | Top 10% |
 
-현재 들어간 값(CSUR 1%, TDSC/TIFS 10%)은 **어림값이며 확인이 필요합니다.**
-마커에 마우스를 올리면 `TODO verify: JCR, ...` 툴팁이 뜨도록 해뒀습니다.
-
-**JCR 수치는 자동으로 가져올 수 없습니다.** Clarivate JCR은 유료 구독이고 공개 API가
-없으며, 스크래핑은 이용약관 위반입니다. 확인 방법은 둘 중 하나입니다.
-
-1. **인하대 도서관 JCR 구독으로 직접 조회** (가장 정확). 저널별로 카테고리와 연도를
-   확인해서 `percentile:`과 `tier_note:`를 채우면 됩니다. 같은 저널도 카테고리에 따라
-   퍼센타일이 다르니 `tier_note`에 어느 카테고리 기준인지 꼭 남겨주세요.
-2. **SJR(SCImago)로 대체** — 무료 공개 데이터이고 CSV로 내려받을 수 있습니다. JCR과
-   수치가 다르므로, 쓰려면 `tier_note`에 "SJR 2025" 처럼 출처를 명시해야 합니다.
-   자동으로 채워넣는 스크립트가 필요하면 말씀해주세요.
+- **배지 색은 종류만 나타냅니다** — 파랑 `#00539b`는 학회, 슬레이트 `#5a6b7a`는 저널.
+  등급은 아래 마커가 담당하므로 색을 여러 개 쓸 이유가 없습니다.
+- 포스터 2건은 `tier = {none}`으로 **두 마커 모두** 자동 제외됩니다.
+- 값이 없는 학회는 마커가 안 붙습니다. 확인 안 된 값을 채우지 마세요.
 
 ### Impact Factor 표기는 전부 제거했습니다
 
 기존 사이트의 IF 값은 2019~2021년 기준이라 현재 수치와 맞지 않고(TSC 11.019는 지금 5점대),
 `BK IF`는 국내 지표라 해외 방문자에게 의미가 전달되지 않습니다.
 위의 Q1/퍼센타일 마커가 그 역할을 대신합니다.
+
+### news 작성 규칙
+
+논문 제목을 그대로 쓰면 너무 길어집니다. 아래 틀을 쓰세요.
+
+> **Our {paper|survey} on {짧은 주제} {is accepted to|was presented at|appears in} {VENUE} {year}.**
+
+- 주제는 3~5단어로. `package attestation`, `certificate revocation`,
+  `certificate validation in in-app browsers` 정도.
+- 전체 제목은 publications 페이지가 담당합니다.
+- 주어는 항상 `Our`로 통일. (`Our work` / `Our paper` 혼용 금지)
+- 학생 이름은 축하 문장에서만.
 
 ### 디자인 커스터마이징
 
@@ -138,8 +144,15 @@ grep -rn "TODO" _bibliography _data _pages _news
 - **글자 크기**: 페이지 제목이 Bootstrap 기본값으로 데스크톱에서 ~50px까지 커지던 것을
   clamp로 고정했고, 본문은 0.95rem / line-height 1.7로 조정했습니다.
 - **소셜 아이콘**: 테마 기본이 `font-size: 4rem`(64px)이라 홈 하단을 점령하고 있었습니다.
+- **본문 색**: 논문 뒤 학회명·연월은 기본 텍스트 색입니다. 회색은 연도 구분선에만 씁니다.
+- **위로가기 버튼**: 푸터가 Bootstrap `.fixed-bottom`(z-index 1030)이라 버튼(z-index 10,
+  bottom 30px)을 덮고 있었습니다. `bottom: 70px` / `z-index: 1031`로 띄웠습니다.
 - 되돌리려면 `_sass/_custom.scss`에서 해당 블록만 지우면 됩니다. 각 블록에 왜 넣었는지
   주석이 달려 있습니다.
+
+빌드할 때 `legacy bootstrap-marked content detected ... _layouts/bib.liquid:182` 경고가
+뜹니다. gem 원본 코드의 Bootstrap 4 잔재(annotation 팝오버)이며, 우리가 그 파일을 복사해
+왔기 때문에 우리 쪽 줄번호로 표시될 뿐입니다. 해당 기능을 쓰지 않으므로 무해합니다.
 
 `_layouts/bib.liquid`는 등급 마커를 넣기 위해 gem에서 복사해 온 **유일한** 오버라이드
 파일입니다 (al_folio_core 1.0.15 기준). gem을 올릴 때는 이 파일이 낡지 않았는지

@@ -104,9 +104,10 @@ body {
   line-height: 1.7;
 }
 
-.post > p,
-.post > ul,
-.post > ol {
+.post > article > p,
+.post > article > ul,
+.post > article > ol,
+.post > article > .clearfix > p {
   max-width: 68ch;
 }
 
@@ -186,10 +187,6 @@ body {
       font-size: 0.875rem;
       line-height: 1.5;
     }
-
-    .periodical {
-      color: var(--global-text-color-light);
-    }
   }
 }
 
@@ -204,7 +201,7 @@ body {
  * ------------------------------------------------------------------------ */
 
 .venue-tier,
-.venue-pct {
+.venue-rank {
   display: inline-block;
   font-size: 0.62rem;
   font-weight: 700;
@@ -225,9 +222,9 @@ body {
   background: transparent;
 }
 
-/* Percentile: deliberately quieter. It is a supporting number, not a claim on
-   the same footing as the venue itself. */
-.venue-pct {
+/* Second marker: deliberately quieter. Holds a BK score or a field
+   percentile, which support the venue name rather than compete with it. */
+.venue-rank {
   border: 1px solid var(--global-divider-color);
   color: var(--global-text-color-light);
   background: transparent;
@@ -263,4 +260,28 @@ body {
     padding-top: 0.45rem;
     padding-bottom: 0.45rem;
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * 8. Home section headings
+ *
+ * about.liquid hardcodes "news" and "selected publications" in lowercase.
+ * Overriding the first letter here is cheaper than vendoring the layout.
+ * ------------------------------------------------------------------------ */
+
+.post article h2::first-letter {
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+ * 9. Back-to-top button
+ *
+ * The footer is Bootstrap .fixed-bottom (z-index 1030) while the button sits
+ * at z-index 10, bottom 30px, so the footer bar covered most of it. Lift it
+ * clear of the bar and above it in the stacking order.
+ * ------------------------------------------------------------------------ */
+
+#back-to-top {
+  bottom: 70px;
+  z-index: 1031;
 }

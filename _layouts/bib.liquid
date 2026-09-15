@@ -34,17 +34,19 @@
         {%- endcomment -%}
         {% assign venue_tier = site.data.venues[entry.abbr].tier %}
         {% if entry.tier %}{% assign venue_tier = entry.tier %}{% endif %}
-        {% assign venue_pct = site.data.venues[entry.abbr].percentile %}
-        {% if entry.percentile %}{% assign venue_pct = entry.percentile %}{% endif %}
+        {% assign venue_rank = site.data.venues[entry.abbr].rank %}
+        {% if entry.rank %}{% assign venue_rank = entry.rank %}{% endif %}
+        {%- comment -%}
+          `tier = {none}` on an entry suppresses both markers, not just the
+          tier. Used by the posters: a poster at a top-tier venue is still a
+          poster, and it should not carry that venue's standing.
+        {%- endcomment -%}
+        {% if venue_tier == 'none' %}{% assign venue_rank = 'none' %}{% endif %}
         {% if venue_tier and venue_tier != 'none' %}
-          <div class="venue-tier"
-            {%- if site.data.venues[entry.abbr].tier_note %} title="{{ site.data.venues[entry.abbr].tier_note }}"{% endif -%}
-          >{{ venue_tier }}</div>
-          {% if venue_pct and venue_pct != 'none' %}
-            <div class="venue-pct"
-              {%- if site.data.venues[entry.abbr].tier_note %} title="{{ site.data.venues[entry.abbr].tier_note }}"{% endif -%}
-            >{{ venue_pct }}</div>
-          {% endif %}
+          <div class="venue-tier">{{ venue_tier }}</div>
+        {% endif %}
+        {% if venue_rank and venue_rank != 'none' %}
+          <div class="venue-rank">{{ venue_rank }}</div>
         {% endif %}
       {% endif %}
       {% if entry.preview %}

@@ -1,82 +1,93 @@
-# Colour of the venue badge shown next to each publication.
+# Venue badge next to each publication.
 # The key must match the `abbr` field in _bibliography/papers.bib exactly.
 #
-# `tier:` and `percentile:` print small markers under the badge. They are set
-# once per venue here, not per paper. A bib entry can override either, or
-# suppress with `tier = {none}` (the two posters do this).
+# color:  encodes TYPE only, and there are just two.
+#           #00539b = conference   |   #5a6b7a = journal
+#         Standing is carried by the markers below, not by the colour.
 #
-# Convention: conferences get `tier: Top-tier`; journals get `tier: Q1` plus a
-# `percentile:` for the field rank. `tier_note:` becomes a hover tooltip and
-# should record WHICH ranking and WHICH year the number came from, so the
-# figures can be re-checked later.
+# tier:   the stronger marker. Conferences use "Top-tier", journals use "Q1".
+# rank:   the quieter second marker. Holds a BK list score for conferences
+#         ("BK 4") or a field percentile for journals ("Top 10%").
 #
-# !! The percentile values below are UNVERIFIED estimates. See README. !!
+# Both are set once per venue here, never per paper. A bib entry may override
+# either, or suppress both with `tier = {none}` (the two posters do this).
+#
+# Percentiles and BK scores below were confirmed by the PI on 2026-09-15.
+# Values are only present where they were actually checked; a venue with no
+# `tier`/`rank` simply shows no marker, which is the correct default.
+
+# ----------------------------- conferences ---------------------------------
 
 "IEEE S&P":
   url: https://www.ieee-security.org/TC/SP-Index.html
   color: "#00539b"
   tier: Top-tier
+  rank: BK 4
 "ACM CCS":
   url: https://www.sigsac.org/ccs.html
   color: "#00539b"
   tier: Top-tier
+  rank: BK 4
 "USENIX Sec":
   url: https://www.usenix.org/conferences/byname/108
   color: "#00539b"
   tier: Top-tier
-"IEEE TDSC":
-  url: https://www.computer.org/csdl/journal/tq
-  color: "#2b7aa8"
-  tier: Q1
-  percentile: Top 10%
-  tier_note: "TODO verify: JCR, Computer Science / Information Systems, year?"
-"IEEE TIFS":
-  url: https://signalprocessingsociety.org/publications-resources/ieee-transactions-information-forensics-and-security
-  color: "#2b7aa8"
-  tier: Q1
-  percentile: Top 10%
-  tier_note: "TODO verify: JCR, Computer Science / Information Systems, year?"
+"IEEE CLOUD":
+  color: "#00539b"
+  rank: BK 1
+"IEEE SERVICES":
+  color: "#00539b"
+"ACM BCC":
+  color: "#00539b"
+"WISA":
+  color: "#00539b"
+"ICUFN":
+  color: "#00539b"
+"WASA":
+  color: "#00539b"
+"CISC-S":
+  color: "#00539b"
+"CISC-W":
+  color: "#00539b"
+
+# ------------------------------- journals ----------------------------------
+
 "ACM CSUR":
   url: https://dl.acm.org/journal/csur
-  color: "#2b7aa8"
+  color: "#5a6b7a"
   tier: Q1
-  percentile: Top 1%
-  tier_note: "TODO verify: JCR, Computer Science / Theory & Methods, year?"
+  rank: Top 1%
+"IEEE TDSC":
+  url: https://www.computer.org/csdl/journal/tq
+  color: "#5a6b7a"
+  tier: Q1
+  rank: Top 10%
+"IEEE TIFS":
+  url: https://signalprocessingsociety.org/publications-resources/ieee-transactions-information-forensics-and-security
+  color: "#5a6b7a"
+  tier: Q1
+  rank: Top 10%
 "IEEE TSC":
-  color: "#2b7aa8"
+  color: "#5a6b7a"
+  tier: Q1
+  rank: Top 10%
 "IEEE TCC":
-  color: "#2b7aa8"
+  color: "#5a6b7a"
 "IEEE IoT-J":
-  color: "#2b7aa8"
+  color: "#5a6b7a"
 "IEEE Access":
-  color: "#4f7d94"
+  color: "#5a6b7a"
 "IJIS":
-  color: "#4f7d94"
+  color: "#5a6b7a"
 "PPNA":
-  color: "#4f7d94"
+  color: "#5a6b7a"
 "WPC":
-  color: "#4f7d94"
+  color: "#5a6b7a"
 "MTAP":
-  color: "#4f7d94"
+  color: "#5a6b7a"
 "MIS":
-  color: "#4f7d94"
-"IEEE CLOUD":
-  color: "#5f7183"
-"IEEE SERVICES":
-  color: "#5f7183"
-"ACM BCC":
-  color: "#5f7183"
-"WISA":
-  color: "#5f7183"
-"ICUFN":
-  color: "#5f7183"
-"WASA":
-  color: "#5f7183"
-"CISC-S":
-  color: "#9099a3"
-"CISC-W":
-  color: "#9099a3"
+  color: "#5a6b7a"
 "KICS":
-  color: "#9099a3"
+  color: "#5a6b7a"
 "KIISE":
-  color: "#9099a3"
+  color: "#5a6b7a"

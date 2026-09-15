@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /join/
-title: join us
+title: Join us
 description: Openings for graduate and undergraduate students.
 nav: true
 nav_order: 4

@@ -1,17 +1,8 @@
 ---
 layout: about
-title: home
+title: Home
 permalink: /
 subtitle: Computer & Intelligence Security Lab · Department of Computer Engineering · <a href="https://www.inha.ac.kr">Inha University</a>
-
-profile:
-  align: right
-  # No lab photo yet. Add one to assets/img/ and set `image:` here; until then
-  # the block shows the address only, which is better than a placeholder box.
-  more_info: >
-    <p>Room #1110, Inha Hi-Tech Center</p>
-    <p>100 Inha-ro, Michuhol-gu</p>
-    <p>Incheon 22212, Korea</p>
 
 selected_papers: true
 social: true
@@ -25,10 +16,10 @@ latest_posts:
   enabled: false
 ---
 
-Software that is supposed to be secure very often is not, once it is deployed at scale. A browser accepts a certificate it should have rejected. A revoked certificate keeps working for weeks. A package arrives with a signature that proves less than it appears to prove. **CIS Lab studies that gap between what a security mechanism promises on paper and what it actually delivers in the field.**
+CIS Lab asks whether security mechanisms that are already deployed actually deliver what they promise. A standard gets written, implementations ship, and the ecosystem moves on long before anyone checks what the guarantee is worth in practice. We go and measure.
 
-We work mostly by measurement. We collect what is really out there, at the scale of the whole ecosystem rather than a handful of samples, and we report what we find. Recent work has covered the TLS and PKI ecosystem (certificate transparency, revocation, certificate validation in in-app browsers) and the software supply chain (what package attestation across ecosystems actually attests to). Alongside this we design cryptographic constructions for querying encrypted data.
+Two areas take up most of our attention. The first is the TLS and PKI ecosystem, where trust in HTTPS rests on certificates that many independent parties issue, log, validate and revoke, and where the weak point is rarely the cryptography itself. The second is the software supply chain, where package registries have begun attaching signatures and attestations to what they distribute, and where the question worth asking is what that evidence really establishes. A third line of work designs cryptographic schemes that keep data encrypted while it is still being queried.
 
-Our results have appeared at IEEE S&P, ACM CCS, USENIX Security, IEEE TDSC, IEEE TIFS, and ACM Computing Surveys.
+What these share is method. We build tools that gather evidence across a whole ecosystem rather than a handful of cases, and we take seriously the difference between what a measurement shows and what we would like it to show.
 
 **We are recruiting.** Graduate and undergraduate students interested in this kind of work should read the [Join us]({{ '/join/' | relative_url }}) page.
