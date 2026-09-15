@@ -32,6 +32,9 @@
   url: https://www.usenix.org/conferences/byname/108
   color: "#00539b"
   tier: Top-tier
+  rank: BK 3
+  # Only entry at this venue is a poster, so no marker shows today. Recorded
+  # here so a future full paper picks it up automatically.
 "IEEE CLOUD":
   color: "#00539b"
   rank: BK 1

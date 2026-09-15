@@ -25,21 +25,14 @@ nav_order: 3
   <div class="col">
     <div class="card h-100 p-3">
       <div class="d-flex align-items-start">
-        <div class="flex-shrink-0 me-3">
-          {% if m.image %}
-          <img src="{{ '/assets/img/people/' | append: m.image | relative_url }}"
-               alt="{{ m.name }}" width="96" height="96"
-               style="object-fit: cover; border-radius: 6px;">
-          {% else %}
-          <div style="width:96px;height:96px;border-radius:6px;
-                      background:var(--global-bg-color);
-                      border:1px solid var(--global-divider-color);
-                      display:flex;align-items:center;justify-content:center;
-                      font-size:1.6rem;color:var(--global-text-color-light);"
-               aria-hidden="true">{{ m.name | slice: 0 }}</div>
-          {% endif %}
-        </div>
-        <div class="flex-grow-1">
+        {% if m.image %}
+        <img class="person-avatar"
+             src="{{ '/assets/img/people/' | append: m.image | relative_url }}"
+             alt="{{ m.name }}">
+        {% else %}
+        <div class="person-avatar person-avatar--blank" aria-hidden="true">{{ m.name | slice: 0 }}</div>
+        {% endif %}
+        <div class="person-body">
           <h5 class="mb-1">{{ m.name }}</h5>
           {% if m.role %}<div class="text-muted" style="font-size:0.9rem;">{{ m.role }}{% if m.year %} · since {{ m.year }}{% endif %}</div>{% endif %}
           {% if m.topic %}<p class="mb-1" style="font-size:0.9rem;">{{ m.topic }}</p>{% endif %}

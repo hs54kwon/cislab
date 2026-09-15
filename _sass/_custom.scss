@@ -94,21 +94,14 @@ html[data-theme="dark"] {
 /* ---------------------------------------------------------------------------
  * 2. Body copy
  *
- * Slightly smaller than Bootstrap's 16px, with a longer line-height. Prose is
- * also capped at a comfortable measure; without this it runs the full 930px,
- * which is a tiring line length to read.
+ * Slightly smaller than Bootstrap's 16px, with a longer line-height. No cap on
+ * the line length: the container already limits it, and a tighter cap looked
+ * like a forced line break when the window was wide.
  * ------------------------------------------------------------------------ */
 
 body {
   font-size: 0.95rem;
   line-height: 1.7;
-}
-
-.post > article > p,
-.post > article > ul,
-.post > article > ol,
-.post > article > .clearfix > p {
-  max-width: 68ch;
 }
 
 .post hr {
@@ -200,6 +193,12 @@ body {
  * are not peer-reviewed full papers even at a top-tier venue).
  * ------------------------------------------------------------------------ */
 
+.publications ol.bibliography li .abbr abbr,
+.publications ol.bibliography li .abbr abbr a,
+.publications ol.bibliography li .abbr abbr div {
+  color: #fff !important;
+}
+
 .venue-tier,
 .venue-rank {
   display: inline-block;
@@ -245,7 +244,33 @@ body {
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
   }
+}
+
+/* Photo and text were nearly touching, and the avatar was pinned at 96px.
+   Scale it with the viewport and open up the gap. */
+.person-avatar {
+  width: clamp(72px, 7vw, 108px);
+  height: clamp(72px, 7vw, 108px);
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.person-avatar--blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--global-bg-color);
+  border: 1px solid var(--global-divider-color);
+  color: var(--global-text-color-light);
+  font-size: 1.5rem;
+}
+
+.person-body {
+  min-width: 0;
+  padding-left: 1.25rem;
 }
 
 /* ---------------------------------------------------------------------------
@@ -255,10 +280,22 @@ body {
 .news {
   font-size: 0.9rem;
 
+  table,
+  td,
+  th {
+    color: var(--global-text-color);
+  }
+
   td,
   th {
     padding-top: 0.45rem;
     padding-bottom: 0.45rem;
+  }
+
+  th {
+    font-weight: 500;
+    color: var(--global-text-color-light);
+    white-space: nowrap;
   }
 }
 

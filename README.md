@@ -106,7 +106,7 @@ grep -rn "TODO" _bibliography _data _pages _news
 | 학회·저널 | tier | rank |
 |---|---|---|
 | IEEE S&P, ACM CCS | Top-tier | BK 4 |
-| USENIX Security | Top-tier | (BK 점수 미확인) |
+| USENIX Security | Top-tier | BK 3 |
 | IEEE CLOUD | (없음) | BK 1 |
 | ACM CSUR | Q1 | Top 1% |
 | IEEE TDSC, TIFS, TSC | Q1 | Top 10% |
@@ -115,12 +115,20 @@ grep -rn "TODO" _bibliography _data _pages _news
   등급은 아래 마커가 담당하므로 색을 여러 개 쓸 이유가 없습니다.
 - 포스터 2건은 `tier = {none}`으로 **두 마커 모두** 자동 제외됩니다.
 - 값이 없는 학회는 마커가 안 붙습니다. 확인 안 된 값을 채우지 마세요.
+- USENIX Security는 현재 포스터 1건뿐이라 마커가 안 보입니다. BK 3은 나중에 정식 논문이
+  실릴 때 자동으로 붙도록 미리 적어둔 값입니다.
 
 ### Impact Factor 표기는 전부 제거했습니다
 
 기존 사이트의 IF 값은 2019~2021년 기준이라 현재 수치와 맞지 않고(TSC 11.019는 지금 5점대),
 `BK IF`는 국내 지표라 해외 방문자에게 의미가 전달되지 않습니다.
 위의 Q1/퍼센타일 마커가 그 역할을 대신합니다.
+
+### 검색 기능은 꺼져 있습니다
+
+`search_enabled: false`, `bib_search: false`. Ctrl+K 오버레이와 논문 목록 위의
+"Type to filter" 입력창이 여기서 나오던 것입니다. 사이트가 작아 굳이 필요하지 않습니다.
+다시 켜려면 `_config.yml`에서 둘 다 `true`로 바꾸면 됩니다.
 
 ### news 작성 규칙
 
