@@ -324,8 +324,39 @@ git push -u origin main
 `_config.yml`의 `url`이 현재 `https://inha-cislab.github.io`로 되어 있습니다.
 **위 표에 맞춰 `url`과 `baseurl`을 반드시 고치세요.** 안 고치면 CSS와 링크가 깨집니다.
 
-커스텀 도메인 승인 후에는 리포 루트에 `CNAME` 파일(내용 한 줄 `cislab.inha.ac.kr`)을
-만들고 `url`도 같이 바꿉니다.
+### 커스텀 도메인을 붙일 때 (승인된 뒤)
+
+**순서를 지키세요. `baseurl`을 안 고치면 CSS와 링크가 전부 깨집니다.**
+
+1. 전산실이 DNS 레코드를 넣어준 것을 확인합니다.
+
+   ```bash
+   nslookup cislab.inha.ac.kr
+   # hs54kwon.github.io 로 향하는 CNAME 이 보여야 합니다
+   ```
+
+2. `_config.yml`을 고칩니다. 커스텀 도메인은 사이트를 **루트**에서 서빙하므로
+   `baseurl`은 반드시 비워야 합니다.
+
+   ```yaml
+   url: https://cislab.inha.ac.kr
+   baseurl:
+   ```
+
+3. 리포 루트에 `CNAME` 파일을 만듭니다. 내용은 도메인 한 줄뿐입니다.
+
+   ```
+   cislab.inha.ac.kr
+   ```
+
+   (GitHub Settings → Pages에서 도메인을 입력해도 이 파일이 자동 생성되지만,
+   우리 배포 워크플로가 `gh-pages`를 통째로 덮어쓰므로 리포에 직접 두는 편이 안전합니다.)
+
+4. push 하고 Actions 빌드를 기다린 뒤, Settings → Pages에서 `Enforce HTTPS`를 켭니다.
+   인증서 발급에 몇 분에서 한 시간쯤 걸립니다.
+
+5. 도메인 소유 확인(선택이지만 권장): Settings → Pages → Verified domains.
+   TXT 레코드를 하나 더 요청해야 하며, 나중에 도메인이 탈취당하는 것을 막아줍니다.
 
 ### 7. 기존 Google Sites 처리
 
