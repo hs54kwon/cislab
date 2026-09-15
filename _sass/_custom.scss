@@ -343,7 +343,39 @@ body {
  *
  * Upstream prints the copyright, the address and "Last updated" as one run of
  * text at the same weight. Split into a main line and a quieter meta line.
+ *
+ * Colours are set outright here rather than through --global-footer-*. Those
+ * two variables invert between themes (dark bar in light mode, light bar in
+ * dark mode), and the footer was reported as unreadable, so the pair is
+ * pinned per theme instead. A quiet surface with a divider reads better under
+ * the page than a heavy inverted bar anyway.
  * ------------------------------------------------------------------------ */
+
+footer.fixed-bottom {
+  background-color: #f1f2f4;
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+footer.fixed-bottom .container {
+  color: #454a52;
+}
+
+footer.fixed-bottom a {
+  color: #00539b;
+}
+
+html[data-theme="dark"] footer.fixed-bottom {
+  background-color: #17181a;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+html[data-theme="dark"] footer.fixed-bottom .container {
+  color: #a9aeb5;
+}
+
+html[data-theme="dark"] footer.fixed-bottom a {
+  color: #5aa2dd;
+}
 
 .footer-main {
   line-height: 1.5;
@@ -351,8 +383,8 @@ body {
 
 .footer-meta {
   margin-top: 0.35rem;
-  font-size: 0.82em;
-  opacity: 0.72;
+  font-size: 0.85em;
+  opacity: 0.8;
 }
 
 /* ---------------------------------------------------------------------------

@@ -23,5 +23,10 @@ module.exports = {
     // and page chrome (scroll-progress bar, ToC) bleeds through a zoomed image.
     "medium-zoom-overlay",
     "medium-zoom-image--opened",
+    // The back-to-top button is created at runtime by a CDN-hosted script, so
+    // the id never appears in the static HTML PurgeCSS scans. Without this the
+    // whole #back-to-top rule set is dropped and the button renders unstyled,
+    // which is how it ended up sitting under the footer bar.
+    "back-to-top",
   ],
 };
