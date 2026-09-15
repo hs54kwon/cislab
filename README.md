@@ -250,46 +250,91 @@ gem을 올릴 때 이 둘이 낡지 않았는지 확인하세요. 추가·수정
 grep -inE "anthropic|openai|auth0|sonnet|opus|gpt-|tamarin|dpop|oauth|android|chrome" _pages/research.md
 ```
 
-## 배포
+## 배포와 권한 관리
 
-### 1. GitHub organization 만들기
+### 1. 리포는 public으로
 
-개인 계정 말고 **organization**으로 만드세요. 나중에 학생에게 권한을 주거나 후임에게 넘길 때 훨씬 간단합니다.
+사이트 자체가 공개이므로 리포를 비공개로 둘 이유가 없고, public이면 이점이 큽니다.
 
-- 예: `inha-cislab`
-- 리포 이름: `inha-cislab.github.io` (조직 페이지 → 루트 주소로 서빙)
+- **GitHub Pages가 무료 플랜에서 동작합니다.** private 리포로 Pages를 쓰려면 유료입니다.
+- **Actions 사용량이 무제한입니다.** private은 월 한도가 있습니다. 이 사이트는 push마다
+  빌드가 돌아가므로 차이가 납니다.
+- **학생이 collaborator가 아니어도 PR을 보낼 수 있습니다.** fork 후 PR이면 됩니다.
 
-### 2. 올리기
+### 2. 개인 계정 + collaborator (지금 계획)
+
+가능합니다. 리포 이름만 결정하시면 됩니다.
+
+| 리포 이름 | 주소 | `_config.yml` |
+|---|---|---|
+| `<계정>.github.io` | `https://<계정>.github.io` | `baseurl:` 비움 |
+| `cislab` | `https://<계정>.github.io/cislab` | `baseurl: /cislab` |
+
+`<계정>.github.io`는 계정당 **하나뿐**입니다. 나중에 개인 홈페이지를 따로 만드실 생각이면
+그 이름은 남겨두고 `cislab`으로 가는 편이 낫습니다.
+
+**커스텀 도메인(`cislab.inha.ac.kr`)을 붙이면 위 구분이 사라집니다.** 방문자에게는 개인
+계정인지 조직인지 보이지 않고, 나중에 조직으로 옮겨도 주소가 그대로입니다. 전산실 승인이
+오래 걸릴 수 있으니 미리 신청해두세요.
+
+방장에게 권한 주기: **Settings → Collaborators → Add people**. `Write` 권한이면 push,
+PR 머지, 이슈 관리가 가능합니다. `Admin`은 리포 삭제·설정 변경까지 되므로 주지 마세요.
+
+### 3. 개인 계정의 유일한 실질적 단점
+
+주소에 교수님 개인 계정명이 들어갑니다. 나중에 조직(`inha-cislab`)으로 옮기는 것 자체는
+**Settings → Transfer ownership**으로 가능하고 GitHub이 리다이렉트도 걸어주지만, 정식
+주소는 바뀝니다. 커스텀 도메인을 쓰면 이 문제가 없어집니다.
+
+급하지 않으니 개인 계정으로 시작하고, 필요해지면 옮기셔도 됩니다.
+
+### 4. 브랜치 보호 (권장)
+
+학생이 실수로 main을 망가뜨리는 것을 막으려면 **Settings → Branches → Add rule**에서
+`main`에 대해 아래를 켜세요. public 리포는 무료 플랜에서도 됩니다.
+
+- `Require a pull request before merging`
+- `Require status checks to pass` → `Deploy site` 선택
+
+이러면 PR마다 빌드가 자동으로 돌고, **빌드가 깨지는 PR은 머지 자체가 막힙니다.**
+교수님과 방장만 리뷰·머지하면 됩니다.
+
+### 5. 실제 작업 흐름
+
+| 누가 | 어떻게 |
+|---|---|
+| 교수님 | 브랜치 파고 PR, 또는 main 직접 push (보호 규칙에 예외 설정 가능) |
+| 방장 | collaborator(Write). 브랜치 → PR → 머지 |
+| 학생 | fork → 수정 → PR. **권한 부여 불필요** |
+
+학생 입장에서는 `_data/people.yml`에 6줄 추가하고 PR 버튼 누르는 게 전부입니다.
+
+### 6. 올리기
 
 ```bash
-git remote add origin https://github.com/inha-cislab/inha-cislab.github.io.git
+git remote add origin https://github.com/<계정>/<리포>.git
 git push -u origin main
 ```
 
-Settings → Pages → Source를 **Deploy from a branch → `gh-pages` / `(root)`** 로 지정합니다.
+**Settings → Pages → Source**를 `Deploy from a branch` → `gh-pages` / `(root)`로 지정합니다.
 (`.github/workflows/deploy.yml`이 빌드해서 `gh-pages` 브랜치로 밀어줍니다.)
 
 첫 빌드는 3~5분 걸립니다. Actions 탭에서 결과를 확인하세요.
 
-### 3. 도메인
+`_config.yml`의 `url`이 현재 `https://inha-cislab.github.io`로 되어 있습니다.
+**위 표에 맞춰 `url`과 `baseurl`을 반드시 고치세요.** 안 고치면 CSS와 링크가 깨집니다.
 
-`_config.yml`의 `url`이 현재 `https://inha-cislab.github.io` 로 되어 있습니다.
+커스텀 도메인 승인 후에는 리포 루트에 `CNAME` 파일(내용 한 줄 `cislab.inha.ac.kr`)을
+만들고 `url`도 같이 바꿉니다.
 
-교내 전산실에 **`cislab.inha.ac.kr` CNAME**을 요청해두시면 좋습니다.
-승인되면 `inha.ac.kr` 도메인을 유지한 채 GitHub Pages로 서빙할 수 있어서, 주소 변경 충격이 거의 없어집니다.
+### 7. 기존 Google Sites 처리
 
-- 요청 내용: `cislab.inha.ac.kr` → `inha-cislab.github.io` (CNAME 레코드)
-- 승인 후: 리포 루트에 `CNAME` 파일 생성(내용 한 줄 `cislab.inha.ac.kr`), `_config.yml`의 `url`도 같이 수정
+Google Sites는 301 리다이렉트를 걸 수 없습니다. 지우지 마시고 **안내 페이지 한 장으로
+남기세요.**
 
-### 4. 기존 Google Sites 처리
-
-Google Sites는 301 리다이렉트를 걸 수 없습니다. 지우지 마시고 **안내 페이지 한 장으로 남기세요.**
-
-- 본문을 전부 지우고 "CIS Lab has moved to <새 주소>" 한 줄 + 링크만 남깁니다
-- 하위 페이지(About/People/Publications/Notice)는 삭제하거나 같은 안내로 교체
-- 논문에 기존 주소를 적어 보내신 적이 있다면 최소 1~2년은 유지하는 게 안전합니다
-
----
+- 본문을 지우고 "CIS Lab has moved to <새 주소>" 한 줄 + 링크만
+- 하위 페이지(About/People/Publications/Notice)도 삭제하거나 같은 안내로 교체
+- 논문이나 명함에 기존 주소를 쓰신 적이 있다면 최소 1~2년은 유지하세요
 
 ## 로컬 미리보기
 
