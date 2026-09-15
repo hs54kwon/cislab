@@ -1,0 +1,59 @@
+# Colour of the venue badge shown next to each publication.
+# The key must match the `abbr` field in _bibliography/papers.bib exactly.
+
+"IEEE S&P":
+  url: https://www.ieee-security.org/TC/SP-Index.html
+  color: "#8c1515"
+"ACM CCS":
+  url: https://www.sigsac.org/ccs.html
+  color: "#8c1515"
+"USENIX Sec":
+  url: https://www.usenix.org/conferences/byname/108
+  color: "#8c1515"
+"IEEE TDSC":
+  url: https://www.computer.org/csdl/journal/tq
+  color: "#00529b"
+"IEEE TIFS":
+  url: https://signalprocessingsociety.org/publications-resources/ieee-transactions-information-forensics-and-security
+  color: "#00529b"
+"ACM CSUR":
+  url: https://dl.acm.org/journal/csur
+  color: "#00529b"
+"IEEE TSC":
+  color: "#00529b"
+"IEEE TCC":
+  color: "#00529b"
+"IEEE IoT-J":
+  color: "#00529b"
+"IEEE Access":
+  color: "#4a6572"
+"IJIS":
+  color: "#4a6572"
+"PPNA":
+  color: "#4a6572"
+"WPC":
+  color: "#4a6572"
+"MTAP":
+  color: "#4a6572"
+"MIS":
+  color: "#4a6572"
+"IEEE CLOUD":
+  color: "#5a5a5a"
+"IEEE SERVICES":
+  color: "#5a5a5a"
+"ACM BCC":
+  color: "#5a5a5a"
+"WISA":
+  color: "#5a5a5a"
+"ICUFN":
+  color: "#5a5a5a"
+"WASA":
+  color: "#5a5a5a"
+"CISC-S":
+  color: "#8a8a8a"
+"CISC-W":
+  color: "#8a8a8a"
+"KICS":
+  color: "#8a8a8a"
+"KIISE":
+  color: "#8a8a8a"

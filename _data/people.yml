@@ -1,0 +1,54 @@
+# -----------------------------------------------------------------------------
+# CIS Lab roster
+#
+# HOW TO ADD YOURSELF (students):
+#   1. Add a block under the right group. Only `name` is required.
+#      Every other field is optional and is simply not rendered if you omit it.
+#      Never leave a field present-but-empty: delete the line instead. (The old
+#      Google Sites page showed bare "E-mail:" labels with nothing after them.)
+#   2. Put a square photo in assets/img/people/<file>.jpg (400x400 or larger)
+#      and set `image:` to the file name. Omit `image` and you get a neutral
+#      placeholder, which is fine.
+#   3. Open a pull request. That PR is your first commit to the lab.
+#
+# Fields: name, image, role, year, email, topic, scholar, github, homepage
+# -----------------------------------------------------------------------------
+
+faculty:
+  - name: Hyunsoo Kwon
+    # image: hskwon.jpg  # TODO: drop a square photo at assets/img/people/hskwon.jpg and uncomment
+    role: Assistant Professor
+    email: hskwon@inha.ac.kr
+    topic: TLS/PKI ecosystem, software supply chain security, applied cryptography
+    homepage: https://sites.google.com/view/hskwon
+    # TODO: add your Google Scholar ID to get a Scholar link here
+    # scholar: XXXXXXXXXXXX
+
+phd:
+  # TODO: confirm each student's degree track, start year, email and topic,
+  #       then delete the TODO lines. Names below are taken from co-authorship
+  #       on recent lab papers; the placement into groups is a guess.
+  - name: Sangkyoung Park
+    topic: Software supply chain, package attestation
+    # co-author, IEEE S&P 2027
+
+  - name: Jiyong Lee
+    topic: Software supply chain, package attestation
+    # co-author, IEEE S&P 2027
+
+ms:
+  - name: Woonghee Lee
+    topic: Mobile browser security, certificate validation
+    # co-author, ACM CCS 2025
+
+undergrad: []
+  # Undergraduate researchers go here. Delete the empty brackets above when you
+  # add the first entry.
+
+alumni:
+  # One line per graduate: name, degree, year, and where they went.
+  # TODO: fill in from lab records.
+  # - name: Example Name
+  #   role: M.S.
+  #   year: 2024
+  #   topic: Now at Example Corp.

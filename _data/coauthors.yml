@@ -1,0 +1,12 @@
+# Turns a co-author's name in the publication list into a link.
+# Key is the lowercased last name; `firstname` lists the spellings to match.
+
+"hur":
+  - firstname: ["Junbeom", "J."]
+    url: https://sites.google.com/view/dsclab
+"hahn":
+  - firstname: ["Changhee", "C."]
+    url: https://scholar.google.com/citations?user=Zs0CkO0AAAAJ
+"kim":
+  - firstname: ["Doowon", "D."]
+    url: https://doowon.github.io/
