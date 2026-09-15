@@ -353,3 +353,61 @@ body {
   font-size: 0.82em;
   opacity: 0.72;
 }
+
+/* ---------------------------------------------------------------------------
+ * 12. Notice page
+ *
+ * The home page shows the five most recent announcements as a compact table.
+ * This page carries all of them and gives longer entries room, so it is laid
+ * out as a list with the date in its own column.
+ * ------------------------------------------------------------------------ */
+
+.notice-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.notice-item {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--global-divider-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.notice-date {
+  flex: 0 0 9.5rem;
+  font-size: 0.85rem;
+  color: var(--global-text-color-light);
+  white-space: nowrap;
+  padding-top: 0.1rem;
+}
+
+.notice-body {
+  min-width: 0;
+}
+
+.notice-title {
+  font-weight: 600;
+}
+
+.notice-desc {
+  font-size: 0.9rem;
+  color: var(--global-text-color-light);
+  margin-top: 0.15rem;
+}
+
+@media (max-width: 576px) {
+  .notice-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .notice-date {
+    flex-basis: auto;
+  }
+}
