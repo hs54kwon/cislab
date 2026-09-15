@@ -68,7 +68,7 @@ html[data-theme="dark"] {
 
 .post-description,
 .post-header .desc {
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: var(--global-text-color-light);
   margin-bottom: 0;
@@ -77,7 +77,7 @@ html[data-theme="dark"] {
 /* Section headings inside a page. The theme leaves these at Bootstrap defaults,
    which makes an h2 nearly as large as the page title. */
 .post h2 {
-  font-size: 1.3rem;
+  font-size: 1.38rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   margin-top: 2.25rem;
@@ -85,7 +85,7 @@ html[data-theme="dark"] {
 }
 
 .post h3 {
-  font-size: 1.08rem;
+  font-size: 1.14rem;
   font-weight: 600;
   margin-top: 1.75rem;
   margin-bottom: 0.6rem;
@@ -100,7 +100,7 @@ html[data-theme="dark"] {
  * ------------------------------------------------------------------------ */
 
 body {
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   line-height: 1.7;
 }
 
@@ -148,7 +148,7 @@ body {
     padding-top: 0.75rem;
 
     span {
-      font-size: 1.05rem;
+      font-size: 1.12rem;
       font-weight: 600;
       letter-spacing: 0.02em;
     }
@@ -160,7 +160,7 @@ body {
     .abbr {
       abbr {
         width: auto !important;
-        font-size: 0.68rem;
+        font-size: 0.72rem;
         font-weight: 600;
         letter-spacing: 0.06em;
         text-transform: uppercase;
@@ -170,14 +170,14 @@ body {
     }
 
     .title {
-      font-size: 1rem;
+      font-size: 1.06rem;
       font-weight: 600;
       line-height: 1.4;
     }
 
     .author,
     .periodical {
-      font-size: 0.875rem;
+      font-size: 0.94rem;
       line-height: 1.5;
     }
   }
@@ -202,7 +202,7 @@ body {
 .venue-tier,
 .venue-rank {
   display: inline-block;
-  font-size: 0.62rem;
+  font-size: 0.66rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -241,7 +241,7 @@ body {
   box-shadow: none;
 
   h5 {
-    font-size: 1rem;
+    font-size: 1.07rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     margin-bottom: 0.2rem;
@@ -278,7 +278,7 @@ body {
  * ------------------------------------------------------------------------ */
 
 .news {
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 
   table,
   td,
@@ -381,7 +381,7 @@ body {
 
 .notice-date {
   flex: 0 0 9.5rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--global-text-color-light);
   white-space: nowrap;
   padding-top: 0.1rem;
@@ -408,7 +408,7 @@ body {
 }
 
 .notice-desc {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--global-text-color-light);
   margin-top: 0.15rem;
 }
