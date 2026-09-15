@@ -36,9 +36,19 @@ ms: []
 
 undergrad:
   - name: Sangkyoung Park
-    role: Undergraduate Researcher
+    role: Undergraduate Student
     topic: Software supply chain, package attestation
     # TODO: add year, email
+
+  # Copy the block below for each new undergraduate student and delete the
+  # lines you have nothing to put in. `name` is the only required field.
+  #
+  # - name: 이름
+  #   role: Undergraduate Student
+  #   year: 2027
+  #   email: id@inha.ac.kr
+  #   topic: 연구 주제
+  #   image: 파일명.jpg        # assets/img/people/ 에 정사각형 사진
 
 alumni:
   # One line per graduate: name, degree, year, and where they went.

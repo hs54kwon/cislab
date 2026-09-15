@@ -14,7 +14,7 @@ nav_order: 2
 {% endcomment %}
 
 {% assign groups = "faculty,phd,ms,undergrad" | split: "," %}
-{% assign labels = "Faculty,Ph.D. &amp; Integrated Students,M.S. Students,Undergraduate Researchers" | split: "," %}
+{% assign labels = "Faculty,Ph.D. &amp; Integrated Students,M.S. Students,Undergraduate Students" | split: "," %}
 
 {% for g in groups %}
   {% assign members = site.data.people[g] %}
@@ -34,9 +34,9 @@ nav_order: 2
         {% endif %}
         <div class="person-body">
           <h5 class="mb-1">{{ m.name }}</h5>
-          {% if m.role %}<div class="text-muted" style="font-size:0.96rem;">{{ m.role }}{% if m.year %} · since {{ m.year }}{% endif %}</div>{% endif %}
-          {% if m.topic %}<p class="mb-1" style="font-size:0.96rem;">{{ m.topic }}</p>{% endif %}
-          <p class="mb-0" style="font-size:0.9rem;">
+          {% if m.role %}<div class="text-muted" style="font-size:1.02rem;">{{ m.role }}{% if m.year %} · since {{ m.year }}{% endif %}</div>{% endif %}
+          {% if m.topic %}<p class="mb-1" style="font-size:1.02rem;">{{ m.topic }}</p>{% endif %}
+          <p class="mb-0" style="font-size:0.96rem;">
             {% if m.email %}<a href="mailto:{{ m.email }}">{{ m.email }}</a>{% endif %}
             {% if m.homepage %} &middot; <a href="{{ m.homepage }}" target="_blank" rel="noopener">homepage</a>{% endif %}
             {% if m.scholar %} &middot; <a href="https://scholar.google.com/citations?user={{ m.scholar }}" target="_blank" rel="noopener">scholar</a>{% endif %}
