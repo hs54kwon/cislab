@@ -328,13 +328,13 @@ body {
  *
  * The PI is emphasised by jekyll-scholar via `scholar.last_name`. With only
  * that, the list reads as one person's page. Lab members named in
- * _data/people.yml are rendered bold by the bib.liquid override, in normal
- * text colour so the emphasis stays quiet.
+ * _data/people.yml are rendered in the accent colour by the bib.liquid
+ * override. Bold was tried first and read as a continuation of the title
+ * sitting directly above the author line.
  * ------------------------------------------------------------------------ */
 
 .publications ol.bibliography li .author .lab-member {
-  font-weight: 700;
-  color: var(--global-text-color);
+  color: var(--global-theme-color);
 }
 
 /* ---------------------------------------------------------------------------
@@ -393,6 +393,18 @@ body {
 
 .notice-title {
   font-weight: 600;
+}
+
+.notice-full {
+  margin-top: 0.4rem;
+
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .notice-desc {

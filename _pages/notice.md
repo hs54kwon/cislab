@@ -13,8 +13,10 @@ nav_order: 4
   Two kinds of entry, set by `inline:` in the file's front matter:
     inline: true   short, one or two sentences, shown in full right here.
                    These are the ones that also appear on the home page.
-    inline: false  longer notice. Needs a `title:`; it gets its own page and
-                   is linked from here by that title.
+    inline: false  longer notice. Needs a `title:`. The home page shows only
+                   the title, linked; this page shows the title and the full
+                   body. That is the point of the split: the home page stays
+                   scannable while the detail lives here.
 
   The home page shows only the five most recent entries; this page shows all.
 {% endcomment %}
@@ -35,7 +37,7 @@ Nothing posted yet.
         {{ item.content | remove: '<p>' | remove: '</p>' }}
       {% else %}
         <a class="notice-title" href="{{ item.url | relative_url }}">{{ item.title }}</a>
-        {% if item.description %}<div class="notice-desc">{{ item.description }}</div>{% endif %}
+        <div class="notice-full">{{ item.content }}</div>
       {% endif %}
     </div>
   </li>

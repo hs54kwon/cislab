@@ -152,11 +152,6 @@ publications에서 **`_data/people.yml`에 이름이 있는 사람은 자동으�
 길게 쓸 공지는 `inline: false`에 `title:`을 주면 자체 페이지가 생깁니다.
 Home의 5개 제한은 `_pages/about.md`의 `announcements.limit`입니다.
 
-### 미공개 연구를 research 페이지에 쓸 때
-
-진행 중인 연구는 **주제 수준으로만** 적어뒀습니다. 수치, 대상 벤더 이름, 시스템/도구 이름,
-구체적 공격 절차는 전부 뺐습니다. 이유는 아래 "공개 전 주의" 항목을 보세요.
-
 ### news 작성 규칙
 
 논문 제목을 그대로 쓰면 너무 길어집니다. 아래 틀을 쓰세요.
@@ -198,27 +193,28 @@ gem을 올릴 때 이 둘이 낡지 않았는지 확인하세요. 추가·수정
 
 ---
 
-## ⚠ 공개 전 주의: 미공개 연구 노출
+## 미공개 연구는 research 페이지에 없습니다
 
-`_pages/research.md`에 진행 중인 연구 4건(코딩 에이전트, OAuth 2.1/DPoP, 모바일 포렌식,
-GPU 부채널)을 넣었습니다. **주제 수준으로만 쓰고 아래는 의도적으로 제외했습니다.**
+진행 중인 4건(코딩 에이전트, OAuth/세션, 모바일 포렌식, GPU 부채널)은 **개별 연구로
+적지 않았습니다.** 분야 이름에만 흡수되어 있습니다.
 
-- 성공률 등 모든 수치
-- 대상 벤더·제품 이름 (Anthropic, OpenAI, Auth0, 모델명 등)
-- 논문에서 붙인 시스템 이름 (double-blind 심사에서 신원 노출 위험)
-- 공격 절차의 구체적 내용
+| 진행 중 연구 | research 페이지에서의 표현 |
+|---|---|
+| 코딩 에이전트 저장소 오염 | AI security |
+| OAuth 2.1 / 브라우저 세션 | Web and PKI security 마지막 한 줄 |
+| 모바일 포렌식 | Systems security and digital forensics |
+| GPU 스케줄링 부채널 | 〃 |
+| 암호화 트래픽 분석 | Applied cryptography and data analysis |
 
-**공개 전에 확인하세요.**
+페이지에 **없는 것**: 수치, 벤더·제품 이름, 모델 이름, 논문 시스템 이름, 플랫폼 이름,
+공격 절차. double-blind 심사에서의 신원 노출과 책임 공개 일정 때문입니다.
 
-1. **Double-blind 심사** — S&P, CCS, USENIX 등은 이중맹검입니다. 랩 페이지에 주제를
-   자세히 적으면 심사위원이 검색으로 저자를 특정할 수 있습니다. 투고 중인 주제는
-   심사가 끝날 때까지 빼두는 것도 방법입니다.
-2. **책임 공개 일정** — 벤더에 통보한 취약점은 공개 합의 기간이 끝나기 전에 웹사이트에
-   올리면 안 됩니다. 코딩 에이전트 건과 Auth0 가용성 영향 건이 여기 해당합니다.
-3. **암호화 트래픽 연구** — 아직 공개 불가라고 하셔서 "deep learning을 도구로 쓴
-   네트워크 트래픽 보안 분석" 수준으로만 적었습니다.
+`_pages/research.md`를 수정할 때 이 선을 넘지 않도록 주의하세요. 아래 명령으로 점검할
+수 있습니다.
 
-문단을 통째로 빼려면 `_pages/research.md`에서 해당 `##` 절만 지우면 됩니다.
+```bash
+grep -inE "anthropic|openai|auth0|sonnet|opus|gpt-|tamarin|dpop|oauth|android|chrome" _pages/research.md
+```
 
 ## 배포
 
