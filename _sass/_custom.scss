@@ -248,18 +248,22 @@ body {
   }
 }
 
-/* Photo and text were nearly touching, and the avatar was pinned at 96px.
-   Scale it with the viewport and open up the gap. */
+/* Photos keep their own proportions. Forcing a square meant cropping a 5:7
+   portrait, which reads badly on a face. Width is fixed so the roster lines
+   up; height follows whatever the photo is. */
 .person-avatar {
-  width: clamp(104px, 11vw, 150px);
-  height: clamp(104px, 11vw, 150px);
+  width: clamp(96px, 9vw, 124px);
+  height: auto;
   flex: 0 0 auto;
-  object-fit: cover;
   border-radius: 6px;
   border: 1px solid var(--global-divider-color);
+  display: block;
 }
 
+/* The blank stand-in has no photo to take a ratio from, so it is given the
+   5:7 of a Korean ID photo to sit alongside the real ones. */
 .person-avatar--blank {
+  aspect-ratio: 5 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -455,4 +459,48 @@ html[data-theme="dark"] footer.fixed-bottom a {
   .notice-date {
     flex-basis: auto;
   }
+}
+
+/* ---------------------------------------------------------------------------
+ * 13. Publication list legend
+ *
+ * The badge colour carries one distinction only, conference against journal.
+ * Nothing on the page said so, so the reader had to infer it.
+ * ------------------------------------------------------------------------ */
+
+.pub-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  margin: 0 0 0.5rem;
+  font-size: 0.92rem;
+  color: var(--global-text-color-light);
+}
+
+.pub-legend-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.pub-legend-swatch {
+  display: inline-block;
+  width: 2.1rem;
+  height: 0.95rem;
+  border-radius: 3px;
+}
+
+.pub-legend-swatch--conf {
+  background: #00539b;
+}
+
+.pub-legend-swatch--journal {
+  background: #5a6b7a;
+}
+
+.pub-legend-note {
+  font-size: 0.92rem;
+  color: var(--global-text-color-light);
+  margin: 0 0 1.75rem;
 }
