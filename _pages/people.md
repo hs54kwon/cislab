@@ -52,14 +52,18 @@ nav_order: 2
 {% endfor %}
 
 {% if site.data.people.alumni and site.data.people.alumni.size > 0 %}
-<h3 class="mt-4">Alumni</h3>
-<ul>
+<h3 class="mt-5">Alumni</h3>
+<ul class="alumni-list">
   {% for m in site.data.people.alumni %}
-  <li><strong>{{ m.name }}</strong>{% if m.role %}, {{ m.role }}{% endif %}{% if m.year %} {{ m.year }}{% endif %}{% if m.topic %} &mdash; {{ m.topic }}{% endif %}</li>
+  <li class="alumni-item">
+    <span class="alumni-name">{{ m.name }}</span>
+    {% if m.degree %}<span class="alumni-degree">{{ m.degree }}</span>{% endif %}
+    {% if m.now %}<span class="alumni-now">{{ m.now }}</span>{% endif %}
+  </li>
   {% endfor %}
 </ul>
 {% endif %}
 
 ---
 
-Interested in joining? See [Join us]({{ '/join/' | relative_url }}).
+Interested in joining? Write to <a href="mailto:hskwon@inha.ac.kr">hskwon@inha.ac.kr</a>.

@@ -102,6 +102,7 @@ html[data-theme="dark"] {
 body {
   font-size: 1.08rem;
   line-height: 1.7;
+  padding-bottom: 150px;
 }
 
 .post hr {
@@ -252,7 +253,7 @@ body {
    portrait, which reads badly on a face. Width is fixed so the roster lines
    up; height follows whatever the photo is. */
 .person-avatar {
-  width: clamp(96px, 9vw, 124px);
+  width: clamp(132px, 13vw, 180px);
   height: auto;
   flex: 0 0 auto;
   border-radius: 6px;
@@ -503,4 +504,51 @@ html[data-theme="dark"] footer.fixed-bottom a {
   font-size: 0.92rem;
   color: var(--global-text-color-light);
   margin: 0 0 1.75rem;
+}
+
+/* ---------------------------------------------------------------------------
+ * 14. Alumni
+ *
+ * Deliberately plainer than the member cards: a name, what they finished, and
+ * where they are now.
+ * ------------------------------------------------------------------------ */
+
+.alumni-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.alumni-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  align-items: baseline;
+  padding: 0.6rem 0.1rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+.alumni-name {
+  font-weight: 600;
+  flex: 0 0 11rem;
+}
+
+.alumni-degree {
+  color: var(--global-text-color-light);
+  font-size: 0.92rem;
+  flex: 0 0 9rem;
+}
+
+.alumni-now {
+  color: var(--global-text-color-light);
+  font-size: 0.95rem;
+  min-width: 0;
+}
+
+@media (max-width: 576px) {
+  .alumni-name,
+  .alumni-degree {
+    flex-basis: auto;
+  }
 }

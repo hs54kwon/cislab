@@ -35,25 +35,45 @@ ms: []
   # the first one joins.
 
 undergrad:
+  # !! 로마자 표기 확인 필요 !!
+  # 아래 영문 이름은 표준 로마자 표기를 기계적으로 적용한 추정값입니다.
+  # 사람 이름은 본인이 여권/논문에서 쓰는 철자가 우선이고 그게 제각각입니다.
+  # (Jeon/Chun, Cho/Jo, Choi, Park/Bak, Jung/Jeong, Kang, Jang/Chang ...)
+  # 각 학생에게 본인 표기를 확인해서 고쳐주세요. 한 번 논문에 실리면 바꾸기 어렵습니다.
   - name: Sangkyoung Park
     role: Undergraduate Student
     topic: Software supply chain, package attestation
     # TODO: add year, email
 
-  # Copy the block below for each new undergraduate student and delete the
-  # lines you have nothing to put in. `name` is the only required field.
-  #
+  - name: Nahyun Jeon            # 전나현
+    role: Undergraduate Student
+  - name: Subeom Cho             # 조수범
+    role: Undergraduate Student
+  - name: Juhyeok Choi           # 최주혁
+    role: Undergraduate Student
+  - name: Yunseo Park            # 박윤서
+    role: Undergraduate Student
+  - name: Hoyoung Jung           # 정호영
+    role: Undergraduate Student
+  - name: Sihun Jung             # 정시훈
+    role: Undergraduate Student
+  - name: Chanhwi Kang           # 강찬휘
+    role: Undergraduate Student
+  - name: Daeseong Jang          # 장대성
+    role: Undergraduate Student
+
+  # 학생이 추가되면 아래를 복사하세요. 없는 항목은 줄을 지우면 됩니다.
   # - name: 이름
   #   role: Undergraduate Student
   #   year: 2027
   #   email: id@inha.ac.kr
   #   topic: 연구 주제
-  #   image: 파일명.jpg        # assets/img/people/ 에 정사각형 사진
+  #   image: 파일명.jpg
 
 alumni:
-  # One line per graduate: name, degree, year, and where they went.
-  # TODO: fill in from lab records.
-  # - name: Example Name
-  #   role: M.S.
-  #   year: 2024
-  #   topic: Now at Example Corp.
+  # 이름 / 학위·연도 / 현재 소속. 그 이상은 적지 않습니다.
+  # 졸업생도 이 목록에 있으면 publications에서 이름이 계속 표시됩니다.
+  #
+  # - name: 이름
+  #   degree: M.S. 2025
+  #   now: Samsung Research

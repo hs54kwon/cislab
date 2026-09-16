@@ -11,7 +11,7 @@ nav_order: 3
   <span class="pub-legend-key"><span class="pub-legend-swatch pub-legend-swatch--journal"></span>Journal</span>
 </div>
 
-<p class="pub-legend-note">Markers under a badge give the venue's standing. Lab members are shown in colour.</p>
+<p class="pub-legend-note">Lab members are shown in colour.</p>
 
 <div class="publications">
 
