@@ -79,7 +79,7 @@ related_posts: false
 
 문장 틀:
 
-- 논문: `Our {paper|survey} on {짧은 주제} {is accepted to|was presented at|appears in} {VENUE} {year}.`
+- 논문: `Our paper on {짧은 주제} {is accepted to|was presented at|appears in} {VENUE} {year}.`
 - 새 구성원: `{이름} joins the lab as {소속}. Welcome, {이름}!`
 
 ---
