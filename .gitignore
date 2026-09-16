@@ -27,3 +27,6 @@ _site/
 node_modules/
 vendor/
 .bundle/
+
+# admin tool
+tools/__pycache__/
