@@ -30,12 +30,22 @@ try:
 except ImportError:
     sys.exit("PyYAML이 필요합니다:  pip install pyyaml")
 
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+
 ROOT = Path(__file__).resolve().parent.parent
 BIB = ROOT / "_bibliography" / "papers.bib"
 PEOPLE = ROOT / "_data" / "people.yml"
 VENUES = ROOT / "_data" / "venues.yml"
 NEWS = ROOT / "_news"
+PHOTOS = ROOT / "assets" / "img" / "people"
 PORT = 8899
+
+# Long edge of a stored photo. The page shows it at 180px at most, so this is
+# already generous for a high-DPI screen and keeps the repository small.
+PHOTO_LONG_EDGE = 980
 
 GROUPS = [
     ("faculty", "Faculty"),
@@ -162,6 +172,19 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 "dirty": [l for l in out.splitlines() if l.strip()],
                 "today": date.today().isoformat(),
             })
+        if self.path.startswith("/img/"):
+            # thumbnails for the form; confined to the photo folder
+            f = (PHOTOS / os.path.basename(urllib.parse.unquote(self.path[5:]))).resolve()
+            if f.is_file() and f.parent == PHOTOS.resolve():
+                body = f.read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type", "image/jpeg")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+            else:
+                self.send_error(404)
+            return
         raw = HTML.encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -185,6 +208,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return {"ok": True, "msg": f"papers.bib에 추가했습니다 (key: {key})"}
         if path == "/api/member":
             return self.api_member(d)
+        if path == "/api/photo":
+            return self.api_photo(d)
         if path == "/api/news":
             return self.api_news(d)
         if path == "/api/build":
@@ -225,6 +250,43 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             "doi": m.get("DOI", doi),
             "kind": "journal" if m.get("type", "").startswith("journal") else "conference",
         }}
+
+    def api_photo(self, d):
+        """Take a photo the browser picked and store a web-ready copy.
+
+        Two things happen here that are easy to forget by hand: the file is
+        saved with no EXIF at all, so a camera's GPS tag cannot be published by
+        accident, and it is scaled down. Proportions are left alone; the page
+        does not crop.
+        """
+        if Image is None:
+            return {"ok": False, "msg": "Pillow가 필요합니다:  pip install pillow"}
+        import base64
+        import io
+
+        name = (d.get("name") or "").strip()
+        if not name:
+            return {"ok": False, "msg": "먼저 이름을 입력하세요"}
+        blob = d.get("data") or ""
+        blob = blob.split(",", 1)[-1]
+        try:
+            im = Image.open(io.BytesIO(base64.b64decode(blob)))
+        except Exception:
+            return {"ok": False, "msg": "이미지를 읽지 못했습니다"}
+
+        im = im.convert("RGB")
+        w, h = im.size
+        scale = min(1.0, PHOTO_LONG_EDGE / max(w, h))
+        if scale < 1.0:
+            im = im.resize((round(w * scale), round(h * scale)), Image.LANCZOS)
+
+        fname = slugify(name) + ".jpg"
+        PHOTOS.mkdir(parents=True, exist_ok=True)
+        # saving without passing exif= writes none at all
+        im.save(PHOTOS / fname, "JPEG", quality=88, optimize=True, progressive=True)
+        kb = (PHOTOS / fname).stat().st_size // 1024
+        return {"ok": True, "file": fname,
+                "msg": f"{fname} 저장 ({im.size[0]}x{im.size[1]}, {kb}KB, EXIF 제거)"}
 
     def api_member(self, d):
         """Edit people.yml as text.
@@ -420,8 +482,15 @@ HTML = r"""<!doctype html>
   </div>
   <div class="row">
    <div><label>email</label><input id="m_email"></div>
-   <div><label>image <span class="hint">assets/img/people/</span></label><input id="m_image"></div>
+   <div><label>사진</label>
+    <div class="row" style="gap:8px">
+     <input type="file" id="m_file" accept="image/*" onchange="upPhoto()" style="padding:5px">
+     <input id="m_image" placeholder="파일명" style="flex:0 0 150px">
+    </div>
+    <div class="hint">고르면 바로 EXIF를 지우고 크기를 줄여 <code>assets/img/people/</code>에 넣습니다. 비율은 그대로 둡니다.</div>
+   </div>
   </div>
+  <img id="m_prev" style="display:none;max-width:130px;border:1px solid var(--bd);border-radius:6px;margin-top:10px">
   <label>topic</label><input id="m_topic">
   <div class="row" id="alumni_only" style="display:none">
    <div><label>degree <span class="hint">M.S. 2025</span></label><input id="m_degree"></div>
@@ -481,6 +550,22 @@ function renderPeople(){
   $('m_list').innerHTML=(S.people[g]||[]).map(m=>
     `<div><span>${m.name}</span><small>${m.role||m.degree||''}</small></div>`).join('')
     ||'<div><small>비어 있음</small></div>';
+}
+function showPrev(f){
+  const e=$('m_prev');
+  if(f){e.src='/img/'+encodeURIComponent(f)+'?t='+Date.now();e.style.display='block';}
+  else{e.style.display='none';}
+}
+$('m_image').addEventListener('change',()=>showPrev($('m_image').value.trim()));
+async function upPhoto(){
+  const f=$('m_file').files[0]; if(!f)return;
+  if(!$('m_name').value.trim())return say(0,'먼저 이름을 입력하세요');
+  if(f.size>25*1024*1024)return say(0,'파일이 너무 큽니다 (25MB 이하)');
+  say(1,'사진 처리 중...');
+  const b=await new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(f);});
+  const r=await api('/api/photo',{name:$('m_name').value,data:b});
+  say(r.ok,r.msg);
+  if(r.ok){$('m_image').value=r.file;showPrev(r.file);}
 }
 function toggleNews(){$('n_title_wrap').style.display=$('n_inline').value==='0'?'block':'none';}
 async function fetchDoi(){
