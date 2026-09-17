@@ -232,51 +232,94 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
- * 6. People cards
+ * 6. People
+ *
+ * This block used Bootstrap grid and flex utilities, but this theme ships
+ * Tailwind: .row-cols-*, .g-4, .align-items-start and .flex-shrink-0 are not
+ * defined anywhere. The row therefore fell back to align-items: stretch, which
+ * stretches a flex item to the height of its line. For an <img> with width set
+ * and height auto that breaks the aspect ratio, and the taller the text beside
+ * it the worse it got, which is why it showed up on a phone first.
+ *
+ * Everything here is now our own, so nothing depends on a utility class that
+ * may or may not exist.
  * ------------------------------------------------------------------------ */
 
-.post .card {
+.people-group {
+  margin-top: 2.25rem;
+}
+
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.person {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.15rem;
+  padding: 1rem;
   border: 1px solid var(--global-divider-color);
   border-radius: 6px;
   background: var(--global-card-bg-color);
-  box-shadow: none;
-
-  h5 {
-    font-size: 1.13rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin-bottom: 0.2rem;
-  }
 }
 
-/* Photos keep their own proportions. Forcing a square meant cropping a 5:7
-   portrait, which reads badly on a face. Width is fixed so the roster lines
-   up; height follows whatever the photo is. */
 .person-avatar {
-  width: clamp(132px, 13vw, 180px);
+  width: clamp(112px, 12vw, 160px);
   height: auto;
   flex: 0 0 auto;
+  align-self: flex-start;   /* never stretch: this is what broke the ratio */
   border-radius: 6px;
   border: 1px solid var(--global-divider-color);
   display: block;
 }
 
-/* The blank stand-in has no photo to take a ratio from, so it is given the
-   5:7 of a Korean ID photo to sit alongside the real ones. */
 .person-avatar--blank {
   aspect-ratio: 5 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--global-bg-color);
-  border: 1px solid var(--global-divider-color);
   color: var(--global-text-color-light);
   font-size: 2.1rem;
 }
 
 .person-body {
   min-width: 0;
-  padding-left: 1.25rem;
+}
+
+.person-name {
+  font-size: 1.07rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.2rem;
+}
+
+.person-role {
+  font-size: 0.95rem;
+  color: var(--global-text-color-light);
+}
+
+.person-topic {
+  font-size: 0.96rem;
+  margin: 0.3rem 0 0.2rem;
+}
+
+.person-links {
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+@media (max-width: 420px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .person {
+    gap: 0.9rem;
+  }
 }
 
 /* ---------------------------------------------------------------------------
