@@ -437,6 +437,11 @@ HTML = r"""<!doctype html>
  .list div:last-child{border:0}
  .list small{color:var(--mut)}
  .hint{color:var(--mut);font-size:12px;margin-top:4px}
+ .warn{display:none;margin-top:14px;padding:10px 13px;border-radius:6px;font-size:13px;
+   background:#fff6e5;color:#7a4b00;border:1px solid #f0d199}
+ @media(prefers-color-scheme:dark){.warn{background:#3a2c10;color:#f3d9a5;border-color:#6b5320}}
+ .list div.pick{cursor:pointer}
+ .list div.pick:hover{background:rgba(127,127,127,.12)}
 </style>
 <header><h1>CIS Lab 사이트 관리</h1><span class="sub" id="stat"></span></header>
 <nav>
@@ -492,13 +497,21 @@ HTML = r"""<!doctype html>
   </div>
   <img id="m_prev" style="display:none;max-width:130px;border:1px solid var(--bd);border-radius:6px;margin-top:10px">
   <label>topic</label><input id="m_topic">
+  <div class="row">
+   <div><label>homepage</label><input id="m_homepage"></div>
+   <div><label>scholar <span class="hint">ID만</span></label><input id="m_scholar"></div>
+   <div><label>github <span class="hint">아이디만</span></label><input id="m_github"></div>
+  </div>
   <div class="row" id="alumni_only" style="display:none">
    <div><label>degree <span class="hint">M.S. 2025</span></label><input id="m_degree"></div>
    <div><label>now <span class="hint">Samsung Research</span></label><input id="m_now"></div>
   </div>
+  <div id="m_warn" class="warn">이미 있는 이름입니다. 저장하면 <b>이 폼의 내용으로 통째로 바뀝니다.</b>
+   비워둔 칸은 삭제되니, 아래 목록에서 눌러 불러온 뒤 고치세요.</div>
   <button class="go" onclick="saveMember(0)">저장</button>
   <button class="go ghost" onclick="saveMember(1)">이 이름 삭제</button>
-  <div class="hint">같은 이름이 있으면 덮어씁니다. 파일의 주석은 그대로 유지됩니다.</div>
+  <button class="go ghost" onclick="clearMember()">폼 비우기</button>
+  <div class="hint">아래 목록에서 사람을 누르면 폼으로 불러옵니다. 파일의 주석은 유지됩니다.</div>
   <div class="list" id="m_list"></div>
  </section>
 
@@ -544,12 +557,33 @@ async function load(){
   renderPeople();
   $('n_list').innerHTML=S.news.slice(0,8).map(n=>`<div><span>${n}</span></div>`).join('');
 }
+const MF=['name','role','year','email','image','topic','degree','now','homepage','scholar','github'];
 function renderPeople(){
   const g=$('m_group').value;
   $('alumni_only').style.display=g==='alumni'?'flex':'none';
-  $('m_list').innerHTML=(S.people[g]||[]).map(m=>
-    `<div><span>${m.name}</span><small>${m.role||m.degree||''}</small></div>`).join('')
+  const list=S.people[g]||[];
+  $('m_list').innerHTML=list.map((m,i)=>
+    `<div class="pick" onclick="pick(${i})"><span>${m.name}</span>`+
+    `<small>${m.role||m.degree||''}</small></div>`).join('')
     ||'<div><small>비어 있음</small></div>';
+  checkDup();
+}
+function pick(i){
+  const m=(S.people[$('m_group').value]||[])[i]; if(!m)return;
+  MF.forEach(f=>{if($('m_'+f))$('m_'+f).value=m[f]||'';});
+  showPrev(m.image||''); checkDup();
+  say(1,`${m.name} 을(를) 불러왔습니다. 고친 뒤 저장하세요.`);
+}
+function clearMember(){
+  MF.forEach(f=>{if($('m_'+f))$('m_'+f).value='';});
+  $('m_file').value=''; showPrev(''); checkDup(); say(1,'폼을 비웠습니다');
+}
+/* Saving replaces the whole entry, so an empty box deletes that field. Say so
+   before it happens rather than after. */
+function checkDup(){
+  const g=$('m_group').value, n=$('m_name').value.trim();
+  const hit=n && (S.people[g]||[]).some(m=>m.name===n);
+  $('m_warn').style.display=hit?'block':'none';
 }
 function showPrev(f){
   const e=$('m_prev');
@@ -557,6 +591,7 @@ function showPrev(f){
   else{e.style.display='none';}
 }
 $('m_image').addEventListener('change',()=>showPrev($('m_image').value.trim()));
+$('m_name').addEventListener('input',checkDup);
 async function upPhoto(){
   const f=$('m_file').files[0]; if(!f)return;
   if(!$('m_name').value.trim())return say(0,'먼저 이름을 입력하세요');
@@ -586,7 +621,8 @@ async function addPaper(){
 async function saveMember(rm){
   const d={group:$('m_group').value,name:$('m_name').value,role:$('m_role').value,
     year:$('m_year').value,email:$('m_email').value,image:$('m_image').value,
-    topic:$('m_topic').value,degree:$('m_degree').value,now:$('m_now').value,remove:!!rm};
+    topic:$('m_topic').value,degree:$('m_degree').value,now:$('m_now').value,
+    homepage:$('m_homepage').value,scholar:$('m_scholar').value,github:$('m_github').value,remove:!!rm};
   if(!d.name)return say(0,'이름을 입력하세요');
   const r=await api('/api/member',d); say(r.ok,r.msg); if(r.ok)load();
 }
