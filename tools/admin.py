@@ -31,7 +31,7 @@ except ImportError:
     sys.exit("PyYAML이 필요합니다:  pip install pyyaml")
 
 try:
-    from PIL import Image
+    from PIL import Image, ImageOps
 except ImportError:
     Image = None
 
@@ -274,7 +274,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         except Exception:
             return {"ok": False, "msg": "이미지를 읽지 못했습니다"}
 
-        im = im.convert("RGB")
+        # Apply whatever rotation the EXIF asks for before the tag is dropped.
+        # Phone photos routinely carry Orientation=6; strip it without rotating
+        # first and the portrait comes out on its side.
+        im = ImageOps.exif_transpose(im).convert("RGB")
         w, h = im.size
         scale = min(1.0, PHOTO_LONG_EDGE / max(w, h))
         if scale < 1.0:
