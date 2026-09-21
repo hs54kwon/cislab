@@ -26,7 +26,9 @@ faculty:
 
 phd:
   - name: Jiyong Lee
+    image: LJY.jpg
     role: Integrated M.S./Ph.D. Student
+    email: jiyonglee@inha.edu
     topic: Software supply chain, package attestation
     # TODO: add year (entry year), email
 
@@ -45,26 +47,41 @@ undergrad:
   # 방법은 README의 "구성원 추가" 항목에 있습니다. name 외에는 전부 선택이고,
   # 값이 없는 줄은 지우면 됩니다.
   - name: Sangkyoung Park
+    image: PSK.jpeg
     role: Undergraduate Student
+    email: bsk021001@inha.edu
     topic: Software supply chain, package attestation
     # TODO: add year, email
 
   - name: Nahyun Jeon            # 전나현
     role: Undergraduate Student
+
   - name: Subeom Cho             # 조수범
     role: Undergraduate Student
+
   - name: Juhyeok Choi           # 최주혁
     role: Undergraduate Student
+    
   - name: Yunseo Park            # 박윤서
+    image: PYS.jpg
     role: Undergraduate Student
+
   - name: Hoyoung Jung           # 정호영
+    image: JHY.jpg
     role: Undergraduate Student
+
   - name: Sihun Jung             # 정시훈
     role: Undergraduate Student
+
   - name: Chanhwi Kang           # 강찬휘
+    image: KCW.jpg
     role: Undergraduate Student
+    email: lonomg0@gmail.com
+    
   - name: Daeseong Jang          # 장대성
+    image: JDS.jpg
     role: Undergraduate Student
+    email: daesungbears@naver.com
 
   # 학생이 추가되면 아래를 복사하세요. 없는 항목은 줄을 지우면 됩니다.
   # - name: 이름
