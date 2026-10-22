@@ -1,0 +1,43 @@
+# Dependency updates for the lab site.
+#
+# Everything here runs at build time only: the deployed site is static HTML, so
+# none of these packages reach a visitor. They do run inside the Actions job
+# that holds GITHUB_TOKEN, though, which is what makes them worth watching.
+#
+# Weekly rather than daily, and grouped, so this produces one PR to review
+# instead of a stream of them.
+
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3
+    groups:
+      jekyll:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"
+
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 2
+    groups:
+      npm:
+        patterns: ["*"]
+    commit-message:
+      prefix: "deps"
+
+  # Actions are the part with access to GITHUB_TOKEN, so they are watched too.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: "ci"

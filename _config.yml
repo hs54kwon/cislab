@@ -243,6 +243,9 @@ exclude:
   - gems/
   - migrations/
   - vendor
+  - requirements.txt
+  - .prettierrc
+  - .prettierignore
 keep_files:
   - CNAME
   - .nojekyll
